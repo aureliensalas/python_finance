@@ -1,4 +1,4 @@
-<img src="https://cdn.jsdelivr.net/gh/maxischa/datacamp_test@main/ressources/img/logo_macmia.png" alt="Logo" width="520">
+<img src="https://cdn.jsdelivr.net/gh/aureliensalas/python_finance@main/ressources/img/logo_macmia.png" alt="Logo" width="520">
 
 # Data Camp Finance 2026/2027
 

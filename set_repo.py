@@ -12,11 +12,11 @@ Remplace partout :
 import re
 import sys
 
-ANCIEN_SLUG = "maxischa/datacamp_test"
+ANCIEN_SLUG = "aureliensalas/python_finance"
 ANCIENS_REFS = ["5a33b79", "main"]        # le logo était épinglé, les données sur main
 
 FICHIERS = [
-    "README_cours_finance.md",
+    "README.md",
     "python/cours/seance1_cours.ipynb",
     "python/cours/seance2_cours.ipynb",
     "python/assignment/simulateur_pret.ipynb",

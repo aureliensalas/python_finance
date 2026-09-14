@@ -1,8 +1,8 @@
 import json, os, textwrap
 
 OUT = "python/assignment/simulateur_pret.ipynb"
-LOGO = '<img src="https://cdn.jsdelivr.net/gh/maxischa/datacamp_test@5a33b79/ressources/img/logo_macmia.png" alt="Banque des Territoires · France 2030 · MACMIA" width="520">'
-BADGE = "[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/maxischa/datacamp_test/blob/main/python/assignment/simulateur_pret.ipynb)"
+LOGO = '<img src="https://cdn.jsdelivr.net/gh/aureliensalas/python_finance@main/ressources/img/logo_macmia.png" alt="Banque des Territoires · France 2030 · MACMIA" width="520">'
+BADGE = "[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/python/assignment/simulateur_pret.ipynb)"
 
 cells = []
 
