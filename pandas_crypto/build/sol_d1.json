@@ -1,0 +1,19 @@
+{
+ "5": "doubles = []\nfor p in prix_liste:\n    doubles.append(p * 2)\ndoubles",
+ "8": "serie = pd.Series(doubles)\nmoyenne = serie.mean()\nmaximum = serie.max()",
+ "59": "jouet[\"close_k\"] = jouet[\"close\"] / 1000",
+ "62": "jouet[\"part\"] = jouet[\"volume\"] / jouet[\"volume\"].sum()",
+ "65": "a = pd.Series([1, 2, 3])\nb = pd.Series([10, 20, 30])\nperso = pd.DataFrame({\"a\": a, \"b\": b})\nperso[\"c\"] = perso[\"a\"] * perso[\"b\"]\nperso",
+ "85": "crypto[\"volume\"].sum(), crypto[\"close\"].max()\ncrypto[\"montant\"] = crypto[\"close\"] * crypto[\"volume\"]",
+ "87": "crypto[\"montant_m\"] = (crypto[\"close\"] * crypto[\"volume\"] / 1e6).round(1)\nmontant_max = crypto[\"montant_m\"].max()",
+ "90": "close_max = crypto[\"close\"].max()\nclose_min = crypto[\"close\"].min()",
+ "98": "part_gros_volume = (crypto[\"volume\"] > crypto[\"volume\"].mean()).mean()",
+ "131": "crypto.query(\"coin == 'SOL'\")[\"close\"].mean()\nlen(crypto.query(\"coin == 'ETH' and close > 4000\"))\ncrypto.query(\"coin == 'BTC' and date >= '2021-01-01' and date < '2022-01-01'\")[\"volume\"].sum()",
+ "133": "nb_jours_100k = len(crypto.query(\"coin == 'BTC' and close > 100000\"))",
+ "136": "nb_btc = len(crypto.query(\"coin == 'BTC'\"))\nnb_sol = len(crypto.query(\"coin == 'SOL'\"))",
+ "139": "eth_2024 = crypto.query(\"coin == 'ETH' and date >= '2024-01-01' and date < '2025-01-01'\")[\"close\"].mean()",
+ "142": "part_doge_xrp = len(crypto.query(\"coin in ['DOGE', 'XRP']\")) / len(crypto)\n(crypto[\"coin\"] == \"DOGE\").mean() + (crypto[\"coin\"] == \"XRP\").mean()",
+ "154": "top_montant = crypto.sort_values(\"montant_m\", ascending=False).head(5)\ntop_montant",
+ "157": "bas_eth = crypto.query(\"coin == 'ETH'\").sort_values(\"close\").head(5)\nbas_eth",
+ "160": "q1 = crypto.query(\"coin == 'DOGE'\")[\"close\"].max()\nq2 = len(crypto.query(\"coin == 'BNB' and close > 600\"))\nq3 = crypto.query(\"coin == 'XRP' and date >= '2025-01-01' and date < '2026-01-01'\")[\"volume\"].mean()"
+}

@@ -1,0 +1,14 @@
+{
+ "6": "capital = float(capital_txt.replace(\" \", \"\").replace(\"€\", \"\"))\nduree_annees = int(duree_txt.replace(\" ans\", \"\"))\nrevenu_mensuel = float(revenu_txt.replace(\" \", \"\").replace(\"€\", \"\"))",
+ "12": "debut = reponse.find(\",LEV,\") + len(\",LEV,\") + 11\ntaux_bce = float(reponse[debut:])\ntaux_bce",
+ "17": "taux_annuel = taux_bce + 1.2\ntaux_mensuel = taux_annuel / 100 / 12\nnb_mois = duree_annees * 12",
+ "21": "mensualite = capital * taux_mensuel / (1 - (1 + taux_mensuel) ** -nb_mois)\nprint(f\"Pour {capital:.0f} € sur {duree_annees} ans à {taux_annuel:.2f} %, la mensualité est de {mensualite:.2f} €.\")",
+ "25": "taux_effort = mensualite / revenu_mensuel\nif taux_effort > 0.35:\n    verdict = \"refus\"\nelif taux_effort > 0.30:\n    verdict = \"accord sous réserve\"\nelse:\n    verdict = \"accord\"\nprint(f\"Taux d'effort : {taux_effort:.1%}, verdict : {verdict}.\")",
+ "28": "if duree_annees > 25:\n    print(\"Attention : durée supérieure à 25 ans.\")\nif mensualite > 1000:\n    print(\"Attention : mensualité supérieure à 1 000 €.\")",
+ "34": "for mois in range(nb_mois):\n    interets = capital_restant * taux_mensuel\n    rembourse = mensualite - interets\n    capital_restant = capital_restant - rembourse\n    interets_liste.append(interets)\n    capital_liste.append(rembourse)\n    restant_liste.append(capital_restant)",
+ "40": "pd.Series(restant_liste).plot()",
+ "42": "cout_credit = sum(interets_liste)\nprint(f\"Coût total du crédit : {cout_credit:.2f} €\")",
+ "45": "bascule = 0\nfor i in range(nb_mois):\n    if capital_liste[i] > interets_liste[i] and bascule == 0:\n        bascule = i + 1\nbascule",
+ "50": "mensualites = []\nfor d in durees:\n    n = d * 12\n    mensualites.append(capital * taux_mensuel / (1 - (1 + taux_mensuel) ** -n))",
+ "53": "pd.Series(mensualites, index=durees).plot(kind=\"bar\")"
+}

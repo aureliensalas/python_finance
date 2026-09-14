@@ -1,0 +1,15 @@
+{
+ "6": "moy_bnb = crypto.query(\"coin == 'BNB'\")[\"close\"].mean()",
+ "9": "nb_doge = len(crypto.query(\"coin == 'DOGE' and close > 0.5\"))",
+ "12": "top_sol = crypto.query(\"coin == 'SOL'\").sort_values(\"close\", ascending=False).head(3)",
+ "39": "nb_trous = sale[\"volume\"].isna().sum()\nnet = sale.dropna(subset=[\"volume\"])\nlen(net)",
+ "52": "net2 = sale2.drop_duplicates().dropna(subset=[\"volume\"])\nlen(net2)",
+ "87": "nb_avant = sale[\"coin\"].nunique()",
+ "90": "vol_btc = net.query(\"coin == 'BTC'\")[\"volume\"].mean()",
+ "99": "nb_2021 = len(crypto.query(\"annee == 2021\"))\nbtc_max_2021 = crypto.query(\"coin == 'BTC' and annee == 2021\")[\"close\"].max()",
+ "130": "crypto.groupby(\"coin\")[\"volume\"].mean().sort_values(ascending=False)\ncrypto.query(\"coin == 'ETH'\").groupby(\"annee\")[\"close\"].min()",
+ "132": "moy_2024 = crypto.query(\"annee == 2024\").groupby(\"coin\")[\"close\"].mean()\nmoy_2024.sort_values(ascending=False)",
+ "135": "nb_jours = crypto.groupby(\"coin\")[\"close\"].count().sort_values()\nnb_jours",
+ "138": "monnaies = [\"BTC\", \"ETH\", \"SOL\", \"DOGE\", \"XRP\", \"BNB\", \"ADA\"]\nres = []\nfor m in monnaies:\n    res.append(crypto.query(f\"coin == '{m}' and annee == 2024\")[\"close\"].mean())\nmoy_2024_boucle = pd.Series(res, index=monnaies)",
+ "148": "crypto.query(\"coin == 'ETH' and annee >= 2023\").plot(x=\"date\", y=\"close\")"
+}

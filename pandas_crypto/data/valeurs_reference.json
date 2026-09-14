@@ -1,0 +1,138 @@
+{
+ "construction": "2026-09-14",
+ "periode": [
+  "2018-01-01",
+  "2026-08-31"
+ ],
+ "nb_lignes": 21325,
+ "nb_par_coin": {
+  "ADA": 3165,
+  "BNB": 3165,
+  "BTC": 3165,
+  "DOGE": 3165,
+  "ETH": 3165,
+  "XRP": 3165,
+  "SOL": 2335
+ },
+ "close_max": 124752.5312,
+ "close_min": 0.0015,
+ "montant_max_m": 350967.9,
+ "volume_total": 73232913602132.0,
+ "close_max_par_coin": {
+  "ADA": 2.9682,
+  "BNB": 1310.2144,
+  "BTC": 124752.5312,
+  "DOGE": 0.6848,
+  "ETH": 4831.3486,
+  "SOL": 261.8698,
+  "XRP": 3.5558
+ },
+ "part_gros_volume": 0.2034,
+ "nb_jours_btc_100k": 217,
+ "nb_btc": 3165,
+ "nb_sol": 2335,
+ "eth_2024_mean": 3044.93,
+ "part_doge_xrp": 0.2968,
+ "top_volume": [
+  {
+   "date": "2021-01-29",
+   "coin": "DOGE",
+   "volume": 538639378813.0
+  },
+  {
+   "date": "2021-01-02",
+   "coin": "DOGE",
+   "volume": 322332813812.0
+  },
+  {
+   "date": "2021-01-28",
+   "coin": "DOGE",
+   "volume": 321897214520.0
+  },
+  {
+   "date": "2021-01-30",
+   "coin": "DOGE",
+   "volume": 310036074923.0
+  },
+  {
+   "date": "2021-01-03",
+   "coin": "DOGE",
+   "volume": 277044693632.0
+  }
+ ],
+ "nb_2021": 2555,
+ "btc_max_2021": 67566.8281,
+ "moy_2024": {
+  "ADA": 0.53,
+  "BNB": 543.25,
+  "BTC": 65964.12,
+  "DOGE": 0.16,
+  "ETH": 3044.93,
+  "SOL": 155.43,
+  "XRP": 0.74
+ },
+ "premiere_annee_par_coin": {
+  "ADA": 2018,
+  "BNB": 2018,
+  "BTC": 2018,
+  "DOGE": 2018,
+  "ETH": 2018,
+  "SOL": 2020,
+  "XRP": 2018
+ },
+ "sale_nb_lignes": 2592,
+ "sale_nb_na_volume": 41,
+ "sale_nb_doublons": 30,
+ "sale_nb_categories_coin": 28,
+ "sale_apres_dropna": 2551,
+ "sale_apres_dropna_puis_dedoublon": 2522,
+ "dca_btc": {
+  "nb_achats": 80,
+  "investi": 8000,
+  "total_btc": 0.283101,
+  "dernier_prix": 78548.6328,
+  "valeur": 22237.19,
+  "gain_pct": 178.0
+ },
+ "dca_par_coin": {
+  "BTC": {
+   "investi": 8000,
+   "valeur": 22237.19,
+   "gain_pct": 178.0
+  },
+  "ETH": {
+   "investi": 8000,
+   "valeur": 20083.3,
+   "gain_pct": 151.0
+  },
+  "SOL": {
+   "investi": 7600,
+   "valeur": 90454.18,
+   "gain_pct": 1090.2
+  },
+  "DOGE": {
+   "investi": 8000,
+   "valeur": 45737.05,
+   "gain_pct": 471.7
+  },
+  "XRP": {
+   "investi": 8000,
+   "valeur": 20881.22,
+   "gain_pct": 161.0
+  },
+  "BNB": {
+   "investi": 8000,
+   "valeur": 57667.56,
+   "gain_pct": 620.8
+  },
+  "ADA": {
+   "investi": 8000,
+   "valeur": 6663.38,
+   "gain_pct": -16.7
+  }
+ },
+ "lump_btc": {
+  "prix_premier_achat": 7200.1743,
+  "valeur": 87274.15
+ }
+}
