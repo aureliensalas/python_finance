@@ -49,8 +49,8 @@ Deux séances de 2h, sur huit ans et demi de cours quotidiens de cryptomonnaies.
 
 | Séance | Sujet | Cours | Correction |
 |---|---|---|---|
-| 2.1 | Des Series à la table — charger, calculer, filtrer, trier | [▶](https://colab.research.google.com/github/maxischa/datacamp_test/blob/main/pandas_crypto/cours/seance1_cours.ipynb) | *après la séance* |
-| 2.2 | Nettoyer et regrouper — valeurs manquantes, doublons, texte, dates, `groupby` | [▶](https://colab.research.google.com/github/maxischa/datacamp_test/blob/main/pandas_crypto/cours/seance2_cours.ipynb) | *après la séance* |
+| 2.1 | Des Series à la table — charger, calculer, filtrer, trier | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/pandas_crypto/cours/seance1_cours.ipynb) | *après la séance* |
+| 2.2 | Nettoyer et regrouper — valeurs manquantes, doublons, texte, dates, `groupby` | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/pandas_crypto/cours/seance2_cours.ipynb) | *après la séance* |
 
 ### Les données du bloc 2
 
