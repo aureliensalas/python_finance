@@ -30,8 +30,8 @@ Deux séances de 2h. Le notebook de **cours** contient les exercices : on montre
 
 | Séance | Sujet | Cours | Correction |
 |---|---|---|---|
-| 1.1 | Python calcule — expressions, types, variables, fonctions, chaînes | [▶](https://colab.research.google.com/github/maxischa/datacamp_test/blob/main/python/cours/seance1_cours.ipynb) | *après la séance* |
-| 1.2 | Python décide et répète — booléens, `if`, listes, `for`, Series | [▶](https://colab.research.google.com/github/maxischa/datacamp_test/blob/main/python/cours/seance2_cours.ipynb) | *après la séance* |
+| 1.1 | Python calcule — expressions, types, variables, fonctions, chaînes | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/python/cours/seance1_cours.ipynb) | *après la séance* |
+| 1.2 | Python décide et répète — booléens, `if`, listes, `for`, Series | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/python/cours/seance2_cours.ipynb) | *après la séance* |
 
 ### Travail noté — le simulateur de prêt
 
@@ -39,7 +39,7 @@ Lancé en classe, terminé à la maison. À partir de trois champs de formulaire
 
 | Sujet | Énoncé | Correction |
 |---|---|---|
-| Le simulateur de prêt | [▶](https://colab.research.google.com/github/maxischa/datacamp_test/blob/main/python/assignment/simulateur_pret.ipynb) | *après le rendu* |
+| Le simulateur de prêt | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/python/assignment/simulateur_pret.ipynb) | *après le rendu* |
 
 ---
 
