@@ -5,6 +5,8 @@ Ce document remplace les sections Python de `PLAN_python_pandas_20h.md`, qui res
 Public : étudiants en finance, niveau programmation nul, Colab sur ordinateur ou tablette.
 Format : deux notebooks de cours avec exercices inclus, un notebook d'assignment, corrections publiées après.
 
+> **Révision de septembre 2026.** Le bloc est ramené de 4h à **2h de classe** (P1 et P2 enchaînés), plus 1h30 d'autonomie pour l'assignment. Les minutages par section ci-dessous sont ceux de la version 4h ; les tableaux de tête de P1 et P2 donnent la version courte. Trois décisions ont changé : les cellules *Prédire* ne s'écrivent plus, on interroge à l'oral ; les index négatifs sont enseignés ; `find` sort du tronc commun.
+
 ---
 
 ## 0. Décisions prises
@@ -13,13 +15,17 @@ Format : deux notebooks de cours avec exercices inclus, un notebook d'assignment
 
 **Ce qu'on bourrine.** Appels de fonctions, booléens, `if`, `for`, Series. Pas les chaînes : 20 minutes, parce qu'un étudiant en finance n'en a besoin que pour trois méthodes.
 
-**Ce qu'on n'enseigne pas.** `//`, `%`, indices négatifs, tuples, dicts, `while`, `def`, compréhensions, `input()`, `break`. Les chaînes de formatage se limitent à `{x:.2f}` et `{x:.1%}`.
+**Ce qu'on n'enseigne pas.** `//`, `%`, tuples, dicts, `while`, `def`, compréhensions, `input()`, `break`. **`find` non plus** : il ne sert que dans le bonus du convertisseur, où il est expliqué sur place.
+
+**Les index négatifs sont enseignés** (P1.8). Ils remplacent `find` partout : dans l'assignment, le taux BCE est le dernier champ de la réponse, donc `ligne.strip()[-4:]` suffit. Une notion de moins, et un motif qui resservira sur les listes et sur les Series.
+
+**Chaînes de formatage.** Limitées à `{x:.2f}` et `{x:.1%}`.
 
 **Ton.** Manuel, neutre. Une définition en une phrase, un ou deux exemples, on avance. Pas de « Votre mission », pas de chute dramatique, pas d'emojis de catégorie. Les énoncés sont à l'impératif : « Calculez ... Rangez le résultat dans `x`. »
 
 **Exercices.** Jamais de texte à trous. Trois formats seulement :
 
-- *Prédire* : l'étudiant écrit en commentaire ce que la cellule va afficher, puis exécute. Pas de cellule de vérification.
+- *Prédire* : la cellule est **nue**. L'étudiant annonce **à voix haute** ce qu'elle va afficher, puis on exécute. Rien à écrire, pas de cellule de vérification : c'est un temps d'interrogation collective, pas un exercice individuel.
 - *Écrire* : une cellule vide, un énoncé d'une ou deux lignes, une cellule `verifier` après.
 - *Corriger* : une cellule fausse, à exécuter, lire, réparer.
 
@@ -27,7 +33,7 @@ Format : deux notebooks de cours avec exercices inclus, un notebook d'assignment
 
 **Vocabulaire fixe.** Huit mots, jamais de synonyme : expression, valeur, type, variable, affectation, appel, argument, méthode. Glossaire en tête de chaque notebook.
 
-**Convertisseur.** Petit exercice de 15 minutes en fin de P1, non noté, en mode démonstration guidée.
+**Convertisseur.** Sorti du temps de classe. Il est devenu le **bonus facultatif** en fin de notebook P1, à faire chez soi. C'est là, et seulement là, qu'on explique `find`. Rien dans la suite du cours n'en dépend.
 
 **Assignment.** Simulateur de prêt, section 3. Un taux réel récupéré chez la BCE, des paramètres qui arrivent en texte, `if`, `for`, Series, courbe.
 
@@ -46,10 +52,12 @@ Format : deux notebooks de cours avec exercices inclus, un notebook d'assignment
 | P1.6 Ordre d'exécution | 5 | 60 |
 | P1.7 Appels de fonctions et modules | 20 | 80 |
 | P1.8 Chaînes | 20 | 100 |
-| P1.9 Convertisseur | 15 | 115 |
-| P1.10 Synthèse | 5 | 120 |
+| P1.9 Synthèse | 5 | 105 |
+| Bonus Convertisseur | hors classe | — |
 
-Points de coupe si retard, dans l'ordre : le convertisseur devient une démonstration de 5 minutes faite par l'enseignant ; la pause-exercice 3 de P1.7 passe en devoir ; les exercices de chaînes passent en échauffement de P2.
+**Version courte, 60 min.** Colab 5 · Valeurs et types (P1.1 à P1.4 fondus, un seul tableau des quatre types) 12 · Variables et ordre d'exécution (P1.5 + P1.6) 15 · Appels et modules 12 · Chaînes, méthodes de nettoyage et index négatifs 10 · les deux *écrire* (`valeur_finale`, `mensualite`) 6.
+
+Points de coupe si retard, dans l'ordre : la pause-exercice 3 de P1.7 passe en devoir ; les exercices de chaînes passent en échauffement de P2.
 
 ### P1.0 Colab, 10 min
 
@@ -383,13 +391,25 @@ Les appels s'enchaînent de gauche à droite :
 "1 250,50".replace(" ", "").replace(",", ".")
 ```
 
-Positions : les caractères sont numérotés à partir de 0. `s[0]` est le premier, `s[2:5]` va de la position 2 incluse à 5 exclue, `s[4:]` va jusqu'au bout. `s.find(morceau)` donne la position où commence le morceau.
+Positions : les caractères sont numérotés à partir de 0. `s[0]` est le premier, `s[2:5]` va de la position 2 incluse à 5 exclue, `s[4:]` va jusqu'au bout.
 
 ```python
-s[0], s[0:3], s[4:], s.find(" ")
+s[0]
+s[0:3]
+s[4:]
 ```
 
 On dit que ce numéro s'appelle un index et que les listes et les tableaux en auront un aussi.
+
+**Index négatifs.** On numérote aussi depuis la fin : `-1` est le dernier caractère, `-2` l'avant-dernier. `s[-3:]` prend les trois derniers, `s[:-4]` tout sauf les quatre derniers.
+
+```python
+s[-1]
+s[-3:]
+s[:-4]
+```
+
+C'est la façon d'attraper ce qui est à la fin d'un texte dont on ne connaît pas la longueur. On dit explicitement que ça servira dans l'assignment, partie 1b. Ça remplace `find`, qui sort du programme.
 
 **Exercices, 10 min.**
 
@@ -405,7 +425,10 @@ On dit que ce numéro s'appelle un index et que les listes et les tableaux en au
 "finance"[2:5]
 ```
 ```python
-"2.5 EUR".find("EUR")
+"finance"[-3:]
+```
+```python
+"2.5 EUR"[-3:]
 ```
 ```python
 "Prix : " + 12.5
@@ -416,7 +439,15 @@ On dit que ce numéro s'appelle un index et que les listes et les tableaux en au
 1. `"2 500,75 €"` en nombre, dans `prix`. Attendu : `2500.75`.
 2. L'année de `"2024-03-12"`, dans `annee`, en texte. Attendu : `"2024"`.
 
-### P1.9 Le convertisseur, 15 min
+### P1.9 Synthèse, 5 min
+
+Tableau « vous voulez / vous écrivez » : afficher, connaître un type, convertir, créer une variable, appeler une fonction, importer un module, une méthode sur une chaîne.
+
+Devoir, cinq cellules à prédire et deux à écrire, sur P1.5 et P1.7. Corrigé à l'échauffement de P2.
+
+---
+
+### Bonus — le convertisseur (hors classe, facultatif)
 
 Exercice guidé, non noté. L'enseignant fait les étapes 1 à 3 en direct, les étudiants font 4 et 5, puis tout le monde joue avec 6.
 
@@ -467,14 +498,6 @@ print(phrase)
 
 Cellule de secours si le réseau tombe : `reponse = '{"amount":2.5,"base":"USD","date":"2026-09-11","rates":{"EUR":2.1567}}'`.
 
-### P1.10 Synthèse, 5 min
-
-Tableau « vous voulez / vous écrivez » : afficher, connaître un type, convertir, créer une variable, appeler une fonction, importer un module, une méthode sur une chaîne.
-
-Devoir, cinq cellules à prédire et deux à écrire, sur P1.5 et P1.7. Corrigé à l'échauffement de P2.
-
----
-
 ## 2. Séance P2 (2h) : Python décide et répète
 
 | Section | Minutes | Cumul |
@@ -487,7 +510,11 @@ Devoir, cinq cellules à prédire et deux à écrire, sur P1.5 et P1.7. Corrigé
 | P2.5 Passerelle Series | 10 | 115 |
 | P2.6 Synthèse, annonce de l'assignment | 5 | 120 |
 
-Points de coupe : la démonstration « ajouter 1 à chaque élément » de P2.4 ; `index()` dans P2.3 ; le deuxième exercice de P2.2.
+**Version courte, 60 min.** Booléens 10 · `if / elif / else` et f-strings 18 · Listes et index négatifs 8 · `for` 22 (accumulateur nombre, accumulateur liste, `range`) · les deux *écrire* (`historique`, `mensualites`) 10 · Series 5.
+
+Points de coupe déjà appliquées : la démonstration « ajouter 1 à chaque élément » et l'écriture dans la liste par `flux[i] = ...` sont **supprimées** — l'assignment ne s'en sert pas et pandas les rend obsolètes. `range` est introduit directement par la lecture de deux listes en parallèle, qui est le motif de la partie 5c.
+
+Points de coupe restants : `index()` dans P2.3 ; le deuxième exercice de P2.2.
 
 ### P2.0 Échauffement, 10 min
 
@@ -590,7 +617,7 @@ Chaînes :
 "eur" in "2.5 EUR"
 ```
 ```python
-"2.5 EUR".find("$") == -1
+"eur" in "2.5 EUR"
 ```
 
 *Écrire* : `eligible = revenu > 30000 and age < 65`, avec `revenu = 42000` et `age = 40`. Attendu : `True`.
@@ -944,7 +971,14 @@ reponse = requests.get(url_bce).text
 print(reponse)
 ```
 
-La réponse est un texte de deux lignes ; la dernière se termine par la date puis le taux : `...MRR_FR.LEV,2026-09-16,2.65`. Consigne : « Le taux commence 11 caractères après le texte `LEV,` (la date fait 10 caractères, plus la virgule) et va jusqu'à la fin. Utilisez `find`, `len`, un slicing sans borne de fin, `float`. Rangez-le dans `taux_bce`. » (1 point)
+La réponse est un texte de deux lignes ; la dernière **se termine** par la date puis le taux : `...MRR_FR.LEV,2026-09-16,2.65\n`. Consigne : « Le taux est le dernier champ, et s'écrit toujours `X.XX`. Retirez d'abord le retour à la ligne final avec `strip()`, puis prenez les quatre derniers caractères et convertissez-les. » (1 point)
+
+```python
+ligne = reponse.strip()
+taux_bce = float(ligne[-4:])
+```
+
+Plus de `find`, plus de comptage de décalage : deux lignes au lieu de trois, et le raisonnement tient en une phrase. Le `strip()` n'est pas décoratif — sans lui, `ligne[-4:]` vaut `".65\n"` et `float` échoue. C'est ce qui justifie de garder `strip` au programme.
 
 Cellule de secours fournie, commentée : `# taux_bce = 2.65   # si le réseau ne répond pas`.
 
@@ -970,7 +1004,7 @@ Avec les valeurs par défaut : `taux_effort = 0.374`, verdict `"refus"`. La cons
 
 4b. La boucle. Trois listes vides `interets_liste`, `capital_liste`, `restant_liste`, une variable `capital_restant = capital`. Une boucle `for mois in range(nb_mois)` qui, à chaque tour, calcule les trois valeurs, met à jour `capital_restant`, et les ajoute aux trois listes. (4 points)
 
-Vérifications : `len(restant_liste) == nb_mois`, `abs(restant_liste[-1]) < 0.01` (le prêt est soldé ; la consigne donne `restant_liste[nb_mois - 1]` pour ne pas introduire l'indice négatif), `abs(interets_liste[0] - 641.67) < 0.01`.
+Vérifications : `len(restant_liste) == nb_mois`, `abs(restant_liste[-1]) < 0.01` (le prêt est soldé ; l'indice négatif est désormais enseigné en P1.8, on l'utilise directement), `abs(interets_liste[0] - 641.67) < 0.01`.
 
 4c. Le tableau. Cellule fournie, à exécuter :
 
@@ -996,7 +1030,7 @@ Pour chaque durée de `[10, 15, 20, 25]`, la mensualité, dans une liste `mensua
 **Bonus, hors barème.** Au choix :
 
 - Un héritage de 30 000 € arrive au mois 60 et rembourse une partie du capital. Refaites la boucle avec un `if mois == 59:` qui retire 30 000 du capital restant, et un `if capital_restant < 0: capital_restant = 0`. Tracez les deux courbes sur le même graphique (deux appels à `.plot()` dans la même cellule). Combien d'intérêts économisés ?
-- La mensualité en francs suisses avec le convertisseur de P1.9.
+- La mensualité en francs suisses avec le convertisseur, désormais en bonus de P1.
 
 ### 3.3 Barème
 
@@ -1021,8 +1055,8 @@ capital = float(capital_txt.replace(" €", "").replace(" ", ""))
 duree_annees = int(duree_txt.replace(" ans", ""))
 revenu_mensuel = float(revenu_txt.replace(" €", "").replace(" ", ""))
 
-pos = reponse.find("LEV,") + len("LEV,") + 11
-taux_bce = float(reponse[pos:])
+ligne = reponse.strip()
+taux_bce = float(ligne[-4:])
 
 taux_annuel = taux_bce + 1.2
 taux_mensuel = taux_annuel / 100 / 12
@@ -1076,10 +1110,10 @@ Après P1, P2 et l'assignment, et rien d'autre :
 - expression, valeur, type, `type()`, `int` `float` `bool` `str`, conversions ;
 - variable, affectation, ordre d'exécution des cellules ;
 - appel de fonction, arguments, `round` `abs` `max` `min` `len` `print`, `import ... as`, `np.sqrt` `np.log` `np.exp` ;
-- chaînes : `+`, `in`, `len`, `upper` `lower` `strip` `replace` `find`, `s[i]`, `s[a:b]` ;
+- chaînes : `+`, `in`, `len`, `upper` `lower` `strip` `replace`, `s[i]`, `s[a:b]`, **et les index négatifs `s[-i]`, `s[-i:]`, `s[:-i]`** ; pas `find` ;
 - booléens : comparaisons, `and` `or` `not`, `True + True` ;
 - `if / elif / else`, plusieurs `if` séparés, f-strings `{x:.2f}` et `{x:.1%}` ;
-- listes : littéral, `[i]`, `[a:b]`, `len` `sum` `max` `min` `in`, `append`, `index`, mutabilité ;
+- listes : littéral, `[i]`, `[a:b]`, `[-1]`, `len` `sum` `max` `min` `in`, `append`, `index`, mutabilité ;
 - `for x in liste`, `for i in range(n)`, accumulateur, liste de résultats ;
 - `pd.Series(liste, index=...)`, `.mean()`, `.max()`, `.plot()` ; `pd.DataFrame({...})` vu une fois comme recette.
 
@@ -1088,7 +1122,7 @@ Après P1, P2 et l'assignment, et rien d'autre :
 ## 5. Production
 
 1. Notebook P1 : 11 sections, environ 45 cellules. Cellule de setup, glossaire, tableau de synthèse.
-2. Notebook P2 : 7 sections, environ 55 cellules dont 20 de prédiction.
+2. Notebook P2 : 7 sections, environ 55 cellules dont 12 de prédiction orale.
 3. Notebook assignment : parties 0 à 6 plus bonus, `verifier` relationnels, cellule de secours pour le taux.
 4. Corrections des trois, générées depuis les notebooks de cours.
 5. Image des boîtes pour P1.5 dans `ressources/img/`.

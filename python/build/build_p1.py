@@ -16,9 +16,9 @@ def code(s):
                   "source": s.splitlines(keepends=True)})
 
 def predire(*exprs):
-    """Une cellule par expression, avec la ligne de prédiction à remplir."""
+    """Une cellule par expression, nue. On annonce la valeur à voix haute, puis on exécute."""
     for e in exprs:
-        code(f"# Prédiction :\n{e}")
+        code(e)
 
 # ---------------------------------------------------------------- en-tête
 md(f"""
@@ -44,8 +44,10 @@ md("""
 - reconnaître les quatre types de valeurs du cours et passer de l'un à l'autre
 - créer une variable, la modifier, et dire ce qu'elle contient
 - appeler une fonction, avec ses arguments, et charger un module
-- appliquer une méthode à une chaîne de caractères
+- appliquer une méthode à une chaîne de caractères, et en découper un morceau
 - lire la dernière ligne d'un message d'erreur
+
+> **Les cellules « Prédire ».** Avant de les exécuter, on annonce **à voix haute** la valeur attendue. Rien à écrire : on dit, on exécute, on compare.
 
 ## Huit mots
 
@@ -147,56 +149,40 @@ C'est l'idée de base de la programmation : **chaque valeur a un type, et le typ
 `type(...)` donne le type d'une valeur.
 """)
 
-code('type(3), type("Hello")')
+code("type(3)")
+
+code('type("Hello")')
 
 md("""
-### `int` : les entiers
+**Les quatre types du cours.**
 
-- **Valeurs** : les nombres entiers, sans point. `3`, `-12`, `2000000`
-- **Opérations** : `+` `-` `*` `/` `**`
-- La division `/` donne toujours un `float`
+| Type | Valeurs | Opérations | À retenir |
+|---|---|---|---|
+| `int` | entiers, sans point : `3`, `-12` | `+` `-` `*` `/` `**` | la division `/` donne toujours un `float` |
+| `float` | avec un point : `2.0`, `0.035` | `+` `-` `*` `/` `**` | `2` et `2.0` : même valeur, pas même type |
+| `bool` | `True`, `False`, majuscule obligatoire | `and` `or` `not` | produit par les comparaisons ; séance 2 |
+| `str` | du texte : `"Hello"`, `'EUR'` | `+`, qui met bout à bout | entre deux `str` seulement |
 """)
 
-code("type(7), type(7 / 7)")
+code("type(7 / 7)")
 
-md("""
-### `float` : les décimaux
+code("2 == 2.0")
 
-- **Valeurs** : les nombres avec un point décimal. `2.0`, `0.035`, `-1.5`
-- **Opérations** : `+` `-` `*` `/` `**`
-- `2` et `2.0` ont la même valeur mathématique, pas le même type
-""")
+code("type(2.0)")
 
-code("type(2), type(2.0), 2 == 2.0")
+code("3 > 2")
 
-md("""
-### `bool` : les booléens
+code("type(3 > 2)")
 
-- **Valeurs** : `True` et `False`, majuscule obligatoire
-- **Opérations** : `and` `or` `not`
-- **Ce qui en produit** : les comparaisons `<` `<=` `>` `>=` `==` `!=`
-
-On y revient longuement à la séance 2.
-""")
-
-code("3 > 2, type(3 > 2)")
-
-md("""
-### `str` : le texte
-
-- **Valeurs** : du texte, entre guillemets doubles ou simples. `"Hello"`, `'EUR'`
-- **Opération** : `+`, qui met bout à bout. Entre deux `str` seulement.
-""")
-
-code('"Hello" + " " + "World", type("Hello")')
+code('"Hello" + " " + "World"')
 
 md("""
 ### Prédire
 
-Pour chaque cellule : écrivez le **type** attendu sur la ligne `# Prédiction :`, puis exécutez.
+Quel **type** ? Annoncez-le, puis exécutez.
 """)
 
-predire("type(7)", "type(7.0)", "type(7 / 7)", "type(7 > 3)", 'type("7")', 'type("sept" + "huit")')
+predire("type(7 / 7)", 'type("7")', 'type("sept" + "huit")')
 
 # ---------------------------------------------------------------- 3. Conversions
 md("""
@@ -205,7 +191,13 @@ md("""
 On change le type d'une valeur avec un appel de la forme **`type(expression)`**.
 """)
 
-code('float(2), int(2.6), str(2), float("2.5")')
+code("float(2)")
+
+code("int(2.6)")
+
+code("str(2)")
+
+code('float("2.5")')
 
 md("""
 Les types s'emboîtent, du plus étroit au plus large :
@@ -330,8 +322,10 @@ x = 5
 x = x + 2
 x = 3.0 * x + 1.0
 x = str(x)
-x, type(x)
+x
 """)
+
+code("type(x)")
 
 # ---------------------------------------------------------------- 6. Ordre d'exécution
 md("""
@@ -402,7 +396,15 @@ On en a déjà utilisé : `type`, `int`, `float`, `str`. Les autres du cours :
 | `len(s)` | la longueur |
 """)
 
-code('round(2.5678, 2), abs(-250), max(3, 8, 5), min(3, 8, 5), len("finance")')
+code("round(2.5678, 2)")
+
+code("abs(-250)")
+
+code("max(3, 8, 5)")
+
+code("min(3, 8, 5)")
+
+code('len("finance")')
 
 md("""
 ### `print` est à part
@@ -425,12 +427,10 @@ La forme devient **`alias.fonction(arguments)`**.
 code("""
 import numpy as np
 
-np.sqrt(2), np.log(1.05), np.exp(0.05)
+np.sqrt(2)
 """)
 
-md("En finance : capitalisation continue, rendement logarithmique.")
-
-code("1000 * np.exp(0.05 * 3), np.log(105 / 100)")
+code("np.log(1.05)")
 
 md("""
 À la séance pandas, `pd.read_csv(...)` aura exactement cette forme.
@@ -438,7 +438,7 @@ md("""
 ### Prédire
 """)
 
-predire("round(2.5678, 1)", "max(3, 8, 5)", 'len("finance")', "round(1000 / 3)", "type(round(2.7))", "round(np.sqrt(2), 3)")
+predire("round(2.5678, 1)", "round(1000 / 3)", "type(round(2.7))")
 
 md("""
 ### Écrire
@@ -492,10 +492,15 @@ Les chaînes ont des fonctions à elles. C'est ce qu'on va voir.
 | `s == t` | `True` si les deux textes sont identiques |
 """)
 
-code("""
-s = "2.5 EUR"
-s + " aujourd'hui", len(s), "EUR" in s, s == "2.5 EUR"
-""")
+code('s = "2.5 EUR"')
+
+code('''s + " aujourd'hui"''')
+
+code("len(s)")
+
+code('"EUR" in s')
+
+code('s == "2.5 EUR"')
 
 md("""
 `+` ne marche qu'entre deux `str`. Pour coller un nombre à du texte, on le convertit d'abord : c'est l'usage de `str()`.
@@ -522,10 +527,17 @@ La fonction est **attachée à la valeur** qui est devant le point. On l'appelle
 | `s.upper()`, `s.lower()` | en majuscules, en minuscules |
 | `s.strip()` | enlève les espaces au début et à la fin |
 | `s.replace(ancien, nouveau)` | remplace un morceau par un autre |
-| `s.find(morceau)` | la position où commence le morceau |
+
+Ces trois-là sont l'outillage de base pour **nettoyer une base de données** : harmoniser la casse, retirer les espaces parasites, corriger un séparateur. On s'en servira sur des colonnes entières au bloc pandas.
 """)
 
-code('s.upper(), s.lower(), "  AIR  ".strip(), "12-03-2024".replace("-", "/")')
+code("s.upper()")
+
+code("s.lower()")
+
+code('"  AIR  ".strip()')
+
+code('"12-03-2024".replace("-", "/")')
 
 md("Les appels s'enchaînent, de gauche à droite.")
 
@@ -546,16 +558,48 @@ Les caractères sont **numérotés à partir de 0**.
 | `s[0]` | le caractère en position 0 |
 | `s[0:3]` | de la position 0 incluse à 3 **exclue** |
 | `s[4:]` | de la position 4 jusqu'au bout |
-| `s.find(" ")` | la position de l'espace |
 
 Ce numéro s'appelle un **index**. Les listes et les tableaux en auront un aussi.
+
+### Compter depuis la fin : les index négatifs
+
+On peut aussi numéroter **en partant de la fin**. `-1` est le dernier caractère, `-2` l'avant-dernier.
+
+```
+ s  =  "2.5 EUR"
+
+         2   .   5   ␣   E   U   R
+         0   1   2   3   4   5   6     depuis le début
+        -7  -6  -5  -4  -3  -2  -1     depuis la fin
+```
+
+(`␣` est l'espace : c'est un caractère comme un autre, en position 3.)
+
+| Écriture | Valeur |
+|---|---|
+| `s[-1]` | le dernier caractère |
+| `s[-3:]` | les trois derniers |
+| `s[:-4]` | tout sauf les quatre derniers |
+| `s[-7:-4]` | du 7ᵉ avant la fin au 4ᵉ avant la fin, exclu |
+
+C'est **la** façon d'attraper quelque chose qui est à la fin d'un texte dont on ne connaît pas la longueur. Vous en aurez besoin dans le devoir.
 """)
 
-code('s[0], s[0:3], s[4:], s.find(" ")')
+code("s[0]")
+
+code("s[0:3]")
+
+code("s[4:]")
+
+code("s[-1]")
+
+code("s[-3:]")
+
+code("s[:-4]")
 
 md("### Prédire")
 
-predire('"abc".upper()', '"12-03-2024".replace("-", "/")', '"finance"[2:5]', '"2.5 EUR".find("EUR")', '"Prix : " + 12.5')
+predire('"abc".upper()', '"finance"[2:5]', '"finance"[-3:]', '"Prix : " + 12.5')
 
 md("""
 ### Écrire
@@ -579,13 +623,79 @@ code("""
 verifier("annee", annee == "2024", "un slicing depuis le début")
 """)
 
-# ---------------------------------------------------------------- 9. Convertisseur
+# ---------------------------------------------------------------- 9. Synthèse
 md("""
-## 9. Un convertisseur de devises
+## 9. Ce que vous savez faire
 
-On assemble tout ce qui précède. Le résultat : une cellule de paramètres en haut, une phrase en bas, et on peut changer les paramètres.
+| Vous voulez... | Vous écrivez |
+|---|---|
+| afficher | `print("Capital :", capital)` |
+| connaître un type | `type(x)` |
+| convertir | `int("3")`, `float("2.5")`, `str(12)` |
+| créer ou modifier une variable | `x = 5`, `x = x + 1` |
+| appeler une fonction | `round(x, 2)`, `max(a, b)`, `len(s)` |
+| charger un module | `import numpy as np`, puis `np.sqrt(2)` |
+| une méthode sur une chaîne | `s.upper()`, `s.strip()`, `s.replace(",", ".")` |
+| un morceau de chaîne | `s[0:3]`, `s[4:]` |
+| la fin d'une chaîne | `s[-1]`, `s[-4:]`, `s[:-1]` |
+| tout recalculer proprement | *Exécution → Redémarrer et tout exécuter* |
 
-Les taux viennent de la Banque centrale européenne, par un service web gratuit.
+## Trois réflexes
+
+1. **Seule la dernière ligne d'une erreur compte.**
+2. **En cas de doute, Redémarrer et tout exécuter.** Le notebook retient l'ordre d'exécution, pas l'ordre d'affichage.
+3. **Un résultat bizarre : `type()`.** Le type décide de ce que les opérations font.
+
+## Pour la prochaine séance
+
+Cinq cellules à prédire, deux à écrire. Corrigées en début de séance 2.
+Le **bonus** en fin de notebook est facultatif.
+""")
+
+predire("int(7.9) + 1", 'str(3) + str(4)', "round(10 / 4, 1)", '"finance"[0] + "finance"[4:]', '"2026-09-16"[-2:]')
+
+md("""
+**1.** Un placement de 5 000 € à 2 % pendant 3 ans. Sa valeur finale, arrondie à 2 décimales, dans `placement`.
+
+**2.** Le texte `"3,5 %"` en nombre décimal `3.5`, dans `taux`.
+""")
+
+code("")
+
+code("""
+verifier("placement", abs(placement - 5306.04) < 0.01, "5000 * (1 + 0.02) ** 3")
+verifier("taux", taux == 3.5, "replace, puis float")
+""")
+
+# ---------------------------------------------------------------- Bonus
+md("""
+---
+
+## Bonus — un convertisseur de devises
+
+**Facultatif, non noté.** À faire chez vous si le cœur vous en dit. Rien dans la suite du cours n'en dépend.
+
+On assemble tout ce qui précède : une cellule de paramètres en haut, une phrase en bas, et on peut changer les paramètres. Les taux viennent d'un service web gratuit.
+
+### Une méthode de plus : `find`
+
+Jusqu'ici, pour découper une chaîne, on comptait les positions à la main. Quand on ne les connaît pas, on cherche un **point de repère** dans le texte.
+
+`s.find(morceau)` renvoie la **position** où commence le morceau, ou `-1` s'il n'y est pas.
+""")
+
+code('"2.5 EUR".find("EUR")')
+
+code('"2.5 EUR".find("$")')
+
+md("""
+Combinée à un slicing, elle permet d'extraire ce qui suit un repère :
+
+```python
+t = '{"EUR":2.1567}'
+debut = t.find('"EUR":') + len('"EUR":')   # juste après le repère
+t[debut:]                                   # '2.1567}'
+```
 
 ### Étape 1 : les paramètres
 """)
@@ -639,7 +749,7 @@ md("""
 
 Dans `reponse`, le nombre qui nous intéresse commence juste après le texte `"EUR":` et se termine juste avant `}`.
 
-Avec `find`, `len`, un slicing et `float`, rangez ce nombre dans `resultat`.
+Avec `find`, `len`, un slicing et `float`, rangez ce nombre dans `resultat`. Deux repères : `'"EUR":'` pour le début, `"}"` pour la fin.
 """)
 
 code("")
@@ -673,48 +783,6 @@ Remontez à l'étape 1. Mettez `"GBP"` comme devise d'arrivée. *Exécution → 
 
 Ça plante à l'étape 4 : le texte cherché est toujours `"EUR":`.
 Remplacez `'"EUR":'` par `'"' + devise_arrivee + '":'`, et relancez tout. Essayez `"JPY"`, `"CHF"`, `1000`.
-""")
-
-# ---------------------------------------------------------------- 10. Synthèse
-md("""
-## 10. Ce que vous savez faire
-
-| Vous voulez... | Vous écrivez |
-|---|---|
-| afficher | `print("Capital :", capital)` |
-| connaître un type | `type(x)` |
-| convertir | `int("3")`, `float("2.5")`, `str(12)` |
-| créer ou modifier une variable | `x = 5`, `x = x + 1` |
-| appeler une fonction | `round(x, 2)`, `max(a, b)`, `len(s)` |
-| charger un module | `import numpy as np`, puis `np.sqrt(2)` |
-| une méthode sur une chaîne | `s.upper()`, `s.strip()`, `s.replace(",", ".")` |
-| un morceau de chaîne | `s[0:3]`, `s.find(" ")` |
-| tout recalculer proprement | *Exécution → Redémarrer et tout exécuter* |
-
-## Trois réflexes
-
-1. **Seule la dernière ligne d'une erreur compte.**
-2. **En cas de doute, Redémarrer et tout exécuter.** Le notebook retient l'ordre d'exécution, pas l'ordre d'affichage.
-3. **Un résultat bizarre : `type()`.** Le type décide de ce que les opérations font.
-
-## Pour la prochaine séance
-
-Cinq cellules à prédire, deux à écrire. Corrigées en début de séance 2.
-""")
-
-predire("int(7.9) + 1", 'str(3) + str(4)', "round(10 / 4, 1)", '"finance"[0] + "finance"[4:]', 'len("12-03-2024".replace("-", ""))')
-
-md("""
-**1.** Un placement de 5 000 € à 2 % pendant 3 ans. Sa valeur finale, arrondie à 2 décimales, dans `placement`.
-
-**2.** Le texte `"3,5 %"` en nombre décimal `3.5`, dans `taux`.
-""")
-
-code("")
-
-code("""
-verifier("placement", abs(placement - 5306.04) < 0.01, "5000 * (1 + 0.02) ** 3")
-verifier("taux", taux == 3.5, "replace, puis float")
 """)
 
 # ---------------------------------------------------------------- écriture

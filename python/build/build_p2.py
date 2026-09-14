@@ -16,8 +16,9 @@ def code(s):
                   "source": s.splitlines(keepends=True)})
 
 def predire(*exprs):
+    """Une cellule par expression, nue. On annonce la valeur à voix haute, puis on exécute."""
     for e in exprs:
-        code(f"# Prédiction :\n{e}")
+        code(e)
 
 # ---------------------------------------------------------------- en-tête
 md(f"""
@@ -48,6 +49,8 @@ md("""
 ## Rappel des huit mots
 
 **expression** · **valeur** · **type** · **variable** · **affectation** · **appel** · **argument** · **méthode**
+
+> **Les cellules « Prédire ».** Avant de les exécuter, on annonce **à voix haute** la valeur attendue. Rien à écrire : on dit, on exécute, on compare.
 
 Exécutez d'abord la cellule de setup.
 """)
@@ -117,15 +120,21 @@ md("""
 > `=` **affecte** une valeur. `==` **compare** deux valeurs.
 """)
 
-code('3 > 2, 3 == 3.0, "EUR" in "2.5 EUR"')
+code("3 > 2")
+
+code("3 == 3.0")
+
+code('"EUR" in "2.5 EUR"')
 
 md("Un booléen se range dans une variable comme n'importe quelle valeur, et s'utilise ensuite.")
 
 code("""
 rendement = 0.05
 positif = rendement > 0
-positif, positif and rendement < 0.1
+positif
 """)
+
+code("positif and rendement < 0.1")
 
 md("""
 `True` vaut aussi `1`, et `False` vaut `0`.
@@ -133,35 +142,35 @@ md("""
 C'est ce qui permettra, à la séance pandas, de **compter** les lignes qui remplissent une condition.
 """)
 
-code("int(True), True + True, True == 1")
+code("int(True)")
+
+code("True + True")
+
+code("True == 1")
 
 md("""
 ### Prédire
 
-Vingt cellules, cinq paquets. Pour chacune, écrivez la valeur attendue, puis exécutez.
+Neuf cellules. Pour chacune, annoncez la valeur, puis exécutez.
 
 **Comparaisons**
 """)
 
-predire("3 > 2", "3 == 3.0", '3 == "3"', '"EUR" == "eur"', "2.5 >= 2.5")
+predire('3 == "3"', '"EUR" == "eur"')
 
 md("**Opérateurs**")
 
-predire("True and False", "True or False", "not (3 > 2)", "(3 > 2) or (2 > 3)", "True and not False")
+predire("True or False", "not (3 > 2)", "True and not False")
 
 md("**Avec une variable**")
 
 code("rendement = 0.05")
 
-predire("rendement > 0 and rendement < 0.1", "rendement > 0.1 or rendement < -0.1", "not rendement > 0")
+predire("rendement > 0 and rendement < 0.1", "not rendement > 0")
 
-md("**Arithmétique**")
+md("**Arithmétique et chaînes**")
 
-predire("True + True + False", "(3 > 2) + (2 > 1)", "int(False), float(True)")
-
-md("**Chaînes**")
-
-predire('"EUR" in "2.5 EUR"', '"eur" in "2.5 EUR"', '"2.5 EUR".find("$") == -1')
+predire("True + True + False", '"eur" in "2.5 EUR"')
 
 md("""
 ### Écrire
@@ -362,19 +371,22 @@ On y accède **comme aux caractères d'une chaîne** : même numérotation à pa
 ```
 """)
 
-code("flux[1], flux[1:3], len(flux)")
+code("flux[1]")
 
-code("""
-s = "abcd"
-s[1], s[1:3], len(s)
-""")
+code("flux[1:3]")
+
+code("len(flux)")
+
+md("Les **index négatifs** aussi, comme sur les chaînes : `-1` est le dernier élément.")
+
+code("flux[-1]")
+
+code("flux[-2:]")
 
 md("""
 Une chaîne et une liste sont deux sortes de **conteneurs** : quelque chose qui contient des valeurs numérotées.
 
-Deux différences : ce qu'on peut mettre dedans, et ceci.
-
-### Une liste est modifiable. Une chaîne ne l'est pas.
+Une différence, qui servira au bloc pandas : **une liste est modifiable, une chaîne ne l'est pas.** `flux[1] = 800` marche ; `s[1] = "x"` donne une `TypeError`.
 """)
 
 code("""
@@ -382,13 +394,7 @@ flux[1] = 800
 flux
 """)
 
-code('s[1] = "x"')
-
 md("""
-```
-TypeError: 'str' object does not support item assignment
-```
-
 ### Ajouter à la fin : `append`
 
 Une méthode de la liste. Elle **modifie** la liste, et ne renvoie rien.
@@ -401,7 +407,11 @@ flux
 
 md("### Fonctions utiles")
 
-code("sum(flux), max(flux), min(flux), 400 in flux")
+code("sum(flux)")
+
+code("max(flux)")
+
+code("400 in flux")
 
 md("### La position d'une valeur : `index`")
 
@@ -409,7 +419,7 @@ code("flux.index(400)")
 
 md("### Prédire")
 
-predire("[1, 2, 3] + [4]", "[10, 20, 30][2]", "len([])", "[1, 2, 3] * 2")
+predire("[1, 2, 3] + [4]", "[10, 20, 30][-1]", "[1, 2, 3] * 2")
 
 md("""
 Gardez le résultat de la dernière en tête : on la reverra à la section 5.
@@ -523,25 +533,9 @@ md("`sum(flux)` fait exactement ça.")
 code("sum(flux)")
 
 md("""
-### Modifier chaque élément : deuxième piège
+### Garder les résultats : un accumulateur qui est une liste
 
-On veut ajouter 1 à chaque élément de `flux`.
-""")
-
-code("""
-for x in flux:
-    x = x + 1
-flux
-""")
-
-md("""
-La liste n'a pas changé.
-
-**Les boîtes, encore.** `x` est une boîte à part. À chaque tour, Python y **copie** la valeur de l'élément. `x = x + 1` change la boîte `x`, pas la liste.
-
-Deux solutions.
-
-**Solution 1 : un accumulateur qui est une liste.** On construit une copie modifiée, avec `append`.
+Un accumulateur n'est pas forcément un nombre. Si on veut **un résultat par élément**, on part d'une liste vide et on `append` à chaque tour.
 """)
 
 code("""
@@ -552,25 +546,29 @@ plus_un
 """)
 
 md("""
-**Solution 2 : passer sur les positions, pas sur les valeurs.**
+> **Le motif qui reviendra tout le cours : une liste vide avant, `append` dedans, le résultat après.**
+
+### Passer sur les positions : `range`
 
 `range(n)` fabrique l'itérable des positions `0, 1, ..., n-1`. C'est son seul rôle.
 """)
 
 code("list(range(4))")
 
+md("""
+Premier usage : **lire deux listes en parallèle**, à la même position. La variable de boucle est alors un **numéro**, pas une valeur.
+""")
+
 code("""
-for i in range(len(flux)):
-    flux[i] = flux[i] + 1
-flux
+depenses = [120, 90, 200]
+recettes = [500, 700, 400]
+
+for i in range(len(depenses)):
+    print(i, recettes[i] - depenses[i])
 """)
 
 md("""
-Cette fois on écrit dans la liste elle-même, case par case.
-
-### Répéter `n` fois
-
-`range(n)` sert aussi à répéter, sans liste du tout.
+Second usage : **répéter `n` fois**, sans liste du tout.
 """)
 
 code("""
@@ -581,10 +579,6 @@ capital
 """)
 
 md("""
-> Une boucle sert à faire quelque chose **de façon répétée**.
->
-> Le motif qui reviendra tout le cours : **une liste vide avant, `append` dedans, le résultat après.**
-
 ### Écrire
 
 **1.** La moyenne de `flux`, sans `sum` ni `len` dans le corps de la boucle : un accumulateur pour le total, un compteur pour le nombre d'éléments, la division après la boucle. Rangez-la dans `moyenne`.
@@ -661,7 +655,9 @@ code("pd.Series([1, 2, 3]) * 2")
 
 md("Les méthodes d'une Series : les mêmes noms que les fonctions sur les listes.")
 
-code("serie.mean(), serie.max()")
+code("serie.mean()")
+
+code("serie.max()")
 
 md("Et un graphique, en une ligne.")
 
@@ -682,6 +678,7 @@ md("""
 | une liste | `flux = [500, 700, 400]` |
 | un élément, une tranche | `flux[0]`, `flux[1:3]` |
 | ajouter à la fin | `flux.append(300)` |
+| un élément depuis la fin | `flux[-1]`, `flux[-2:]` |
 | passer sur chaque élément | `for x in flux:` |
 | passer sur les positions | `for i in range(len(flux)):` |
 | répéter n fois | `for i in range(n):` |

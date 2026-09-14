@@ -151,39 +151,44 @@ print(reponse)
 """)
 
 md("""
-**Observez la réponse.** C'est un texte de deux lignes. La première est un en-tête : les noms des colonnes. La seconde contient les valeurs, et se termine par ce qui nous intéresse :
+**Observez la réponse.** C'est un texte de deux lignes. La première est un en-tête : les noms des colonnes. La seconde contient les valeurs, et **se termine** par ce qui nous intéresse :
 
 ```
 ...,MRR_FR,LEV,2026-09-16,2.65
 ```
 
-c'est-à-dire, après le texte `,LEV,` : une **date de 10 caractères**, une virgule, puis **le taux**, jusqu'à la fin du texte. La date et le taux changent avec le temps ; le reste ne change pas.
+Le taux est le tout dernier élément, précédé de la date. Le début de la ligne est long et illisible ; la fin, elle, a toujours la même forme : une **date de 10 caractères**, une virgule, puis le **taux**, qui s'écrit toujours `X.XX` — quatre caractères.
 
-**Le raisonnement.** On veut extraire le taux. Il est à la fin, mais on ne connaît pas sa position : le texte est long. On procède comme dans le convertisseur de la séance 1 :
+**Le raisonnement.** On ne connaît pas la longueur du texte, donc on ne peut pas compter depuis le début. Mais on sait compter **depuis la fin** : ce sont les index négatifs de la séance 1, section 8.
 
-1. Trouver un **point de repère** juste avant ce qu'on cherche. Ici : le texte `",LEV,"`, avec ses deux virgules. `reponse.find(",LEV,")` donne sa position.
-2. Se placer **juste après** le repère : ajouter `len(",LEV,")`.
-3. Sauter la date et la virgule qui suivent : ajouter `11` (10 caractères de date, plus 1 virgule).
-4. Prendre **tout ce qui reste** jusqu'à la fin : un slicing sans borne de fin, `reponse[position:]`.
-5. Convertir en nombre avec `float`. Le retour à la ligne final ne gêne pas.
+Un obstacle d'abord : le texte se termine par un **retour à la ligne** invisible. Tant qu'il est là, le dernier caractère n'est pas `5` mais ce retour à la ligne. On le retire avec `strip()`, qui enlève les espaces et les retours à la ligne au début et à la fin.
+
+```python
+ligne = reponse.strip()
+```
+
+Ensuite, sur `ligne` :
+
+- `ligne[-4:]` : les **quatre derniers** caractères, c'est-à-dire le taux, en texte ;
+- `float(...)` pour en faire un nombre.
 
 Exemple du même raisonnement sur un texte court :
 
 ```python
-t = "FM,B,code,2026-09-16,2.65"
-debut = t.find(",code,") + len(",code,") + 11
-float(t[debut:])                    # donne 2.65
+t = "FM,B,code,2026-09-16,2.65\\n"
+ligne = t.strip()
+ligne[-4:]                          # donne "2.65"
+float(ligne[-4:])                   # donne 2.65
+ligne[-15:-5]                       # donne "2026-09-16", la date
 ```
 
-Le repère doit être `",LEV,"` avec les virgules : `"LEV"` tout seul apparaît aussi plus tôt dans la ligne.
-
-Rangez le résultat dans `taux_bce`.
+Rangez le taux dans `taux_bce`.
 """)
 
 code("")
 
 code("""
-verifier("taux BCE", type(taux_bce) == float and 0 < taux_bce < 10, 'find de ",LEV,", plus len, plus 11, slicing sans fin, float')
+verifier("taux BCE", type(taux_bce) == float and 0 < taux_bce < 10, "strip() pour le retour à la ligne, puis les 4 derniers caractères, puis float")
 """)
 
 md("""
@@ -384,7 +389,7 @@ for mois in range(nb_mois):
 code("""
 verifier("une valeur par mois", len(interets_liste) == nb_mois and len(capital_liste) == nb_mois and len(restant_liste) == nb_mois, "trois append par tour de boucle")
 verifier("interets du mois 1", abs(interets_liste[0] - capital * taux_mensuel) < 0.01, "capital_restant * taux_mensuel, avant toute mise à jour")
-verifier("pret solde", abs(restant_liste[nb_mois - 1]) < 0.01, "au dernier mois, le capital restant doit être 0 : vérifiez la mise à jour de capital_restant")
+verifier("pret solde", abs(restant_liste[-1]) < 0.01, "au dernier mois, le capital restant doit être 0 : vérifiez la mise à jour de capital_restant")
 verifier("bilan", abs(mensualite * nb_mois - (capital + sum(interets_liste))) < 1, "ce qui a été payé = le capital + tous les intérêts")
 """)
 

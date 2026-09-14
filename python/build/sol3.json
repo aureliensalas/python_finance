@@ -1,6 +1,6 @@
 {
  "6": "capital = float(capital_txt.replace(\" \", \"\").replace(\"€\", \"\"))\nduree_annees = int(duree_txt.replace(\" ans\", \"\"))\nrevenu_mensuel = float(revenu_txt.replace(\" \", \"\").replace(\"€\", \"\"))",
- "12": "debut = reponse.find(\",LEV,\") + len(\",LEV,\") + 11\ntaux_bce = float(reponse[debut:])\ntaux_bce",
+ "12": "ligne = reponse.strip()\ntaux_bce = float(ligne[-4:])\ntaux_bce",
  "17": "taux_annuel = taux_bce + 1.2\ntaux_mensuel = taux_annuel / 100 / 12\nnb_mois = duree_annees * 12",
  "21": "mensualite = capital * taux_mensuel / (1 - (1 + taux_mensuel) ** -nb_mois)\nprint(f\"Pour {capital:.0f} € sur {duree_annees} ans à {taux_annuel:.2f} %, la mensualité est de {mensualite:.2f} €.\")",
  "25": "taux_effort = mensualite / revenu_mensuel\nif taux_effort > 0.35:\n    verdict = \"refus\"\nelif taux_effort > 0.30:\n    verdict = \"accord sous réserve\"\nelse:\n    verdict = \"accord\"\nprint(f\"Taux d'effort : {taux_effort:.1%}, verdict : {verdict}.\")",

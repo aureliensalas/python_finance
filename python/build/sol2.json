@@ -1,12 +1,12 @@
 {
  "4": "montant = float(\"1 250,50 €\".replace(\" €\", \"\").replace(\" \", \"\").replace(\",\", \".\"))",
  "7": "valeur = round(abs(-3.14159), 2)",
- "44": "eligible = revenu > 30000 and age < 65",
- "62": "if a > b:\n    plus_grand = a\nelse:\n    plus_grand = b",
- "66": "if a > b and a > c:\n    plus_grand_3 = a\nelif b > c:\n    plus_grand_3 = b\nelse:\n    plus_grand_3 = c",
- "70": "if rendement > 0:\n    signe = \"hausse\"\nelif rendement < 0:\n    signe = \"baisse\"\nelse:\n    signe = \"stable\"",
- "96": "flux = [1200, 800, 1500, 900]\nflux[2] = 1600\nflux.append(700)\ntotal = sum(flux)\nposition_max = flux.index(max(flux))",
- "119": "total = 0\nnombre = 0\nfor x in flux:\n    total = total + x\n    nombre = nombre + 1\nmoyenne = total / nombre",
- "122": "capital = 1000\nhistorique = []\nfor annee in range(10):\n    capital = capital * 1.03\n    historique.append(capital)",
- "126": "mensualites = []\nfor r in taux:\n    t = r / 12\n    mensualites.append(200000 * t / (1 - (1 + t) ** -240))"
+ "38": "eligible = revenu > 30000 and age < 65",
+ "56": "if a > b:\n    plus_grand = a\nelse:\n    plus_grand = b",
+ "60": "if a > b and a > c:\n    plus_grand_3 = a\nelif b > c:\n    plus_grand_3 = b\nelse:\n    plus_grand_3 = c",
+ "64": "if rendement > 0:\n    signe = \"hausse\"\nelif rendement < 0:\n    signe = \"baisse\"\nelse:\n    signe = \"stable\"",
+ "94": "flux = [1200, 800, 1500, 900]\nflux[2] = 1600\nflux.append(700)\ntotal = sum(flux)\nposition_max = flux.index(max(flux))",
+ "116": "total = 0\nnombre = 0\nfor x in flux:\n    total = total + x\n    nombre = nombre + 1\nmoyenne = total / nombre",
+ "119": "capital = 1000\nhistorique = []\nfor annee in range(10):\n    capital = capital * 1.03\n    historique.append(capital)",
+ "123": "mensualites = []\nfor r in taux:\n    t = r / 12\n    mensualites.append(200000 * t / (1 - (1 + t) ** -240))"
 }
