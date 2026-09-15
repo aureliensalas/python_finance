@@ -17,11 +17,9 @@ ANCIENS_REFS = ["5a33b79", "main"]        # le logo était épinglé, les donné
 
 FICHIERS = [
     "README.md",
-    "python/cours/seance1_cours.ipynb",
-    "python/cours/seance2_cours.ipynb",
+    "python/cours/python_cours.ipynb",
     "python/assignment/simulateur_pret.ipynb",
-    "python/build/build_p1.py",
-    "python/build/build_p2.py",
+    "python/build/build_python.py",
     "python/build/build_a1.py",
     "pandas_crypto/cours/seance1_cours.ipynb",
     "pandas_crypto/cours/seance2_cours.ipynb",

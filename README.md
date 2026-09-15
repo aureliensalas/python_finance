@@ -26,12 +26,11 @@ Rien à installer : tout se passe dans **Google Colab**, qui exécute le code su
 
 ## Bloc 1 — Python (4h)
 
-Deux séances de 2h. Le notebook de **cours** contient les exercices : on montre une notion, vous la refaites aussitôt. La **correction** est publiée après la séance.
+Une séance de 2h, en un seul notebook. Il contient les exercices : on montre une notion, vous la refaites aussitôt. La **correction** est publiée après la séance.
 
 | Séance | Sujet | Cours | Correction |
 |---|---|---|---|
-| 1.1 | Python calcule — expressions, types, variables, fonctions, chaînes | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/python/cours/seance1_cours.ipynb) | *après la séance* |
-| 1.2 | Python décide et répète — booléens, `if`, listes, `for`, Series | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/python/cours/seance2_cours.ipynb) | *après la séance* |
+| 1 | Python — expressions, types, variables, fonctions, chaînes, booléens, `if`, listes, `for`, Series | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/python/cours/python_cours.ipynb) | *après la séance* |
 
 ### Travail noté — le simulateur de prêt
 
@@ -80,7 +79,7 @@ Source : Yahoo Finance via [yfinance](https://github.com/ranaroussi/yfinance). C
 ## Comment ce dépôt est organisé
 
 ```
-python/cours/            les deux notebooks de cours du bloc 1
+python/cours/            le notebook de cours du bloc 1
 python/assignment/       le travail noté
 python/build/            les scripts qui génèrent ces notebooks
 pandas_crypto/cours/     les deux notebooks de cours du bloc 2

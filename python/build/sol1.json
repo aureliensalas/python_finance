@@ -1,9 +1,0 @@
-{
- "77": "valeur_finale = round(1000 * (1 + 0.03) ** 5, 2)\nvaleur_finale",
- "80": "t = 0.03 / 12\nn = 240\nmensualite = round(200000 * t / (1 - (1 + t) ** -n), 2)\nmensualite",
- "113": "prix = float(\"2 500,75 €\".replace(\" €\", \"\").replace(\" \", \"\").replace(\",\", \".\"))\nprix",
- "116": "annee = \"2024-03-12\"[0:4]\nannee",
- "125": "placement = round(5000 * (1 + 0.02) ** 3, 2)\ntaux = float(\"3,5 %\".replace(\" %\", \"\").replace(\",\", \".\"))",
- "139": "debut = reponse.find('\"EUR\":') + len('\"EUR\":')\nfin = reponse.find(\"}\")\nresultat = float(reponse[debut:fin])\nresultat",
- "142": "phrase = \"Vous pouvez échanger \" + str(montant) + \" \" + devise_depart + \" contre \" + str(round(resultat, 2)) + \" \" + devise_arrivee + \".\"\nprint(phrase)"
-}

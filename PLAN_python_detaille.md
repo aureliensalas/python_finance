@@ -5,7 +5,7 @@ Ce document remplace les sections Python de `PLAN_python_pandas_20h.md`, qui res
 Public : étudiants en finance, niveau programmation nul, Colab sur ordinateur ou tablette.
 Format : deux notebooks de cours avec exercices inclus, un notebook d'assignment, corrections publiées après.
 
-> **Révision de septembre 2026.** Le bloc est ramené de 4h à **2h de classe** (P1 et P2 enchaînés), plus 1h30 d'autonomie pour l'assignment. Les minutages par section ci-dessous sont ceux de la version 4h ; les tableaux de tête de P1 et P2 donnent la version courte. Trois décisions ont changé : les cellules *Prédire* ne s'écrivent plus, on interroge à l'oral ; les index négatifs sont enseignés ; `find` sort du tronc commun.
+> **Révision de septembre 2026.** Le bloc est ramené de 4h à **2h de classe**, plus 1h30 d'autonomie pour l'assignment. P1 et P2 sont **fusionnés en un seul notebook**, `python/cours/python_cours.ipynb`, en 14 sections numérotées d'affilée (1 à 8 = l'ancien P1, 9 à 13 = l'ancien P2, 14 = la synthèse), avec une pause après la section 8. L'échauffement de P2 est supprimé : ses deux premiers exercices faisaient doublon avec P1, le troisième a été gardé et déplacé en section 7. Les découpages P1/P2 ci-dessous restent la référence du contenu, pas de la numérotation. Les minutages par section ci-dessous sont ceux de la version 4h ; les tableaux de tête de P1 et P2 donnent la version courte. Trois décisions ont changé : les cellules *Prédire* ne s'écrivent plus, on interroge à l'oral ; les index négatifs sont enseignés ; `find` sort du tronc commun.
 
 ---
 
