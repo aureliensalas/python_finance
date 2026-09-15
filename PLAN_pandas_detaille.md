@@ -801,6 +801,8 @@ Le tableau « vous voulez / vous écrivez », sur une page. Les deux phrases du 
 
 ## 5. L'exercice de synthèse : 100 dollars par mois
 
+> **Construit le 15 septembre 2026**, sous le titre « Assignment 2 : l'investissement programmé » — `pandas_crypto/assignment/investissement_programme.ipynb`, généré par `build/build_a2.py`, solutions dans `build/sol_a2.json`, valeurs de référence dans `data/valeurs_export.json`. Deux écarts avec la spécification ci-dessous. **(1)** Il part d'un export brut plein format, `crypto_export.csv` (construit par `data/build_export.py`), et commence par deux parties de diagnostic et de réparation : sans elles, l'exercice ne remobilisait que 30 des 120 minutes de D2 (ni le nettoyage, ni `groupby`). **(2)** Une partie « pourquoi ça marche » compare le prix moyen payé (28 258 $) au prix moyen du marché (49 051 $) et regroupe le bitcoin accumulé par année avec `groupby` — trois quarts viennent des trois années les moins chères. La partie « tout d'un coup » passe en bonus hors barème. Barème : 2 / 4 / 3 / 4 / 3 / 4. Durée visée : 60 à 75 min en classe, fin à la maison. Seule nouveauté hors cours : `.iloc[-1]`, présentée comme l'équivalent colonne de `liste[-1]`. Toutes les valeurs ci-dessous restent exactes sur la table nettoyée.
+
 En classe, 45 minutes, puis correction. Sur le fichier propre `crypto.csv`, avec les dates converties. Même présentation que l'assignment Python : objectif d'ensemble, parties numérotées, indication guidée, cellule de vérification, point d'étape.
 
 ### 5.1 Ce que ça produit

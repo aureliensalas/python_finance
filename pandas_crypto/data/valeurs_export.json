@@ -1,0 +1,97 @@
+{
+ "construction": "2026-09-15",
+ "brut": {
+  "nb_lignes": 21445,
+  "nb_noms_coin": 28,
+  "nb_doublons": 120,
+  "nb_volume_manquant": 152,
+  "nb_close_manquant": 24
+ },
+ "propre": {
+  "nb_lignes": 21301,
+  "nb_sans_prix_apres_dedoublon": 24,
+  "close_max": 124752.5312,
+  "nb_volume_manquant_garde": 150
+ },
+ "dca_btc": {
+  "nb_achats": 80,
+  "investi": 8000,
+  "quantite": 0.283101,
+  "dernier_prix": 78548.6328,
+  "valeur": 22237.19,
+  "gain_pct": 178.0
+ },
+ "prix_moyen_paye": 28258.48,
+ "prix_moyen_marche": 49051.34,
+ "btc_par_annee": {
+  "2020": 0.122174,
+  "2021": 0.027541,
+  "2022": 0.045449,
+  "2023": 0.044762,
+  "2024": 0.019792,
+  "2025": 0.012026,
+  "2026": 0.011357
+ },
+ "dca_par_coin": {
+  "BTC": {
+   "nb_achats": 80,
+   "investi": 8000,
+   "quantite": 0.283101,
+   "dernier_prix": 78548.6328,
+   "valeur": 22237.19,
+   "gain_pct": 178.0
+  },
+  "ETH": {
+   "nb_achats": 80,
+   "investi": 8000,
+   "quantite": 8.141371,
+   "dernier_prix": 2466.8203,
+   "valeur": 20083.3,
+   "gain_pct": 151.0
+  },
+  "SOL": {
+   "nb_achats": 76,
+   "investi": 7600,
+   "quantite": 878.222342,
+   "dernier_prix": 102.9969,
+   "valeur": 90454.18,
+   "gain_pct": 1090.2
+  },
+  "DOGE": {
+   "nb_achats": 80,
+   "investi": 8000,
+   "quantite": 552379.879867,
+   "dernier_prix": 0.0828,
+   "valeur": 45737.05,
+   "gain_pct": 471.7
+  },
+  "XRP": {
+   "nb_achats": 80,
+   "investi": 8000,
+   "quantite": 15142.28869,
+   "dernier_prix": 1.379,
+   "valeur": 20881.22,
+   "gain_pct": 161.0
+  },
+  "BNB": {
+   "nb_achats": 80,
+   "investi": 8000,
+   "quantite": 83.452162,
+   "dernier_prix": 691.0253,
+   "valeur": 57667.56,
+   "gain_pct": 620.8
+  },
+  "ADA": {
+   "nb_achats": 80,
+   "investi": 8000,
+   "quantite": 33687.464042,
+   "dernier_prix": 0.1978,
+   "valeur": 6663.38,
+   "gain_pct": -16.7
+  }
+ },
+ "lump_btc": {
+  "prix_premier_achat": 7200.1743,
+  "valeur": 87274.15
+ }
+}

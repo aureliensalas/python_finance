@@ -51,6 +51,14 @@ Deux séances de 2h, sur huit ans et demi de cours quotidiens de cryptomonnaies.
 | 2.1 | Des Series à la table — charger, calculer, filtrer, trier | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/pandas_crypto/cours/seance1_cours.ipynb) | *après la séance* |
 | 2.2 | Nettoyer et regrouper — valeurs manquantes, doublons, texte, dates, `groupby` | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/pandas_crypto/cours/seance2_cours.ipynb) | *après la séance* |
 
+### Travail noté — l'investissement programmé
+
+Lancé en classe, terminé à la maison. Une cliente demande ce qu'aurait donné 100 dollars par mois dans le bitcoin depuis 2020. L'export de données qu'on vous remet n'a pas été relu : il faut le diagnostiquer et le réparer avant de répondre — puis mesurer le résultat, expliquer pourquoi la méthode fonctionne, et comparer les sept monnaies.
+
+| Sujet | Énoncé | Correction |
+|---|---|---|
+| L'investissement programmé | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/pandas_crypto/assignment/investissement_programme.ipynb) | *après le rendu* |
+
 ### Les données du bloc 2
 
 Les fichiers se chargent **directement depuis le web** : rien à télécharger.
@@ -59,8 +67,9 @@ Les fichiers se chargent **directement depuis le web** : rien à télécharger.
 |---|---|---|
 | `crypto.csv` | 21 325 | Une monnaie un jour : `date`, `coin`, `close`, `volume`. Sept monnaies (BTC, ETH, SOL, DOGE, XRP, BNB, ADA), du 1er janvier 2018 au 31 août 2026 |
 | `crypto_sale.csv` | 2 592 | L'année 2024, **volontairement abîmée** : prix en texte, volumes manquants, doublons, noms de monnaies incohérents |
+| `crypto_export.csv` | 21 445 | Toute la période, **volontairement abîmée** de la même façon, plus quelques prix manquants. C'est l'export « brut » du travail noté |
 
-Source : Yahoo Finance via [yfinance](https://github.com/ranaroussi/yfinance). Construction reproductible par [`pandas_crypto/data/build_data.py`](pandas_crypto/data/build_data.py).
+Source : Yahoo Finance via [yfinance](https://github.com/ranaroussi/yfinance). Construction reproductible par [`pandas_crypto/data/build_data.py`](pandas_crypto/data/build_data.py), puis [`build_export.py`](pandas_crypto/data/build_export.py) pour l'export brut.
 
 ---
 
@@ -83,7 +92,8 @@ python/cours/            le notebook de cours du bloc 1
 python/assignment/       le travail noté
 python/build/            les scripts qui génèrent ces notebooks
 pandas_crypto/cours/     les deux notebooks de cours du bloc 2
-pandas_crypto/data/      les CSV et le script qui les construit
+pandas_crypto/assignment/ le travail noté du bloc 2
+pandas_crypto/data/      les CSV et les scripts qui les construisent
 pandas_crypto/build/     les scripts qui génèrent ces notebooks
 ressources/              aide-mémoire, réglages tablette, images
 ```

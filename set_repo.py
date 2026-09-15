@@ -23,8 +23,10 @@ FICHIERS = [
     "python/build/build_a1.py",
     "pandas_crypto/cours/seance1_cours.ipynb",
     "pandas_crypto/cours/seance2_cours.ipynb",
+    "pandas_crypto/assignment/investissement_programme.ipynb",
     "pandas_crypto/build/build_d1.py",
     "pandas_crypto/build/build_d2.py",
+    "pandas_crypto/build/build_a2.py",
 ]
 
 
