@@ -31,7 +31,7 @@ FICHIERS = [
     "stats_crypto/cours/seance2_cours.ipynb",
     "stats_crypto/build/build_s1.py",
     "stats_crypto/build/build_s2.py",
-    "stats_crypto/assignment/fiche_de_risque.ipynb",
+    "stats_crypto/assignment/fiche_analyse.ipynb",
     "stats_crypto/build/build_a3.py",
 ]
 

@@ -82,13 +82,13 @@ Deux séances de 2h, sur les mêmes cryptomonnaies. La première construit la co
 | 3.1 | Décrire le risque — rendement, `describe`, `groupby` sur plusieurs mesures, histogramme | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/stats_crypto/cours/seance1_cours.ipynb) | *après la séance* |
 | 3.2 | Comparer, et douter — bootstrap, intervalle de confiance, test t, tests répétés, corrélation | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/stats_crypto/cours/seance2_cours.ipynb) | *après la séance* |
 
-### Travail en autonomie — la fiche de risque
+### Travail en autonomie — la fiche d'analyse
 
-À faire après les deux séances, seul. Une fonction de mise en page est fournie ; l'étudiant calcule les cinq indicateurs de risque d'une cryptomonnaie et les voit remplir la fiche au fur et à mesure. Il termine avec une petite application à champ de saisie.
+À faire après les deux séances, seul. Une fonction de mise en page est fournie ; l'étudiant calcule ce qui va dedans et voit la fiche se remplir au fur et à mesure. Deux volets : le **risque** d'une cryptomonnaie, puis le test d'une **idée de stratégie** lue sur un forum — qui se révèle indécidable sur le bitcoin, et bien réelle sur une autre monnaie. Il termine avec une petite application à champ de saisie.
 
 | Sujet | Énoncé |
 |---|---|
-| La fiche de risque | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/stats_crypto/assignment/fiche_de_risque.ipynb) |
+| La fiche d'analyse | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/stats_crypto/assignment/fiche_analyse.ipynb) |
 
 ### Les données du bloc 3
 

@@ -1,6 +1,6 @@
-# Bloc 3, travail en autonomie : la fiche de risque
+# Bloc 3, travail en autonomie : la fiche d'analyse
 
-**Construit** le 16 septembre 2026 : `stats_crypto/assignment/fiche_de_risque.ipynb`, généré par `build/build_a3.py`, solutions dans `build/sol_a3.json`.
+**Construit** le 16 septembre 2026 : `stats_crypto/assignment/fiche_analyse.ipynb`, généré par `build/build_a3.py`, solutions dans `build/sol_a3.json`. Un seul exercice pour les deux séances, en deux volets.
 
 Données : `crypto.csv`, déjà connu. Aucun nouveau fichier.
 
@@ -18,7 +18,9 @@ Conséquence sur l'écriture : **tout doit pouvoir se faire sans l'enseignant à
 
 **Nous codons la présentation, ils codent le contenu.**
 
-Une fonction `afficher_fiche(...)` est fournie. Elle dessine une fiche de risque en quatre étages :
+Une fonction `afficher_fiche(...)` est fournie. Elle dessine une fiche en deux volets.
+
+**Premier volet — le risque** (séance 5), en quatre étages :
 
 1. un **bandeau** avec le nom de la monnaie et la période couverte ;
 2. le **cours au fil du temps**, en grand ;
@@ -33,31 +35,43 @@ La fonction vit dans `prototypes/fiche_risque.py` ; `build_a3.py` la lit et l'in
 
 ## 3. Le déroulé
 
-**Décor.** Setup, la fonction fournie — « longue, et vous n'avez pas à la lire ». Choix de `MONNAIE`, chargement, premier appel : la fiche vide.
+**Décor.** Setup, la fonction fournie — « longue, et vous n'avez pas à la lire ». Choix de `MONNAIE`, chargement, premier appel : la fiche entièrement vide, deux volets gris.
 
-**Étape 1 — la table et la colonne de rendement.** Les deux pièges de la séance 5 rappelés : le `groupby` obligatoire, et le `dropna`. On accepte les deux ordres possibles (filtrer puis calculer, ou l'inverse) en le disant. Puis `periode` et `prix` sont passés : **la courbe du cours apparaît.**
+### Premier volet — le risque
 
-**Étape 2 — rendement moyen et médian.** Et la remarque qui compte : une moyenne positive avec une médiane négative n'est pas une erreur, c'est une information.
+**Étape 1, la table et la colonne `r`.** Les deux pièges de la séance 5 rappelés. Puis `periode` et `prix` passés : la courbe du cours apparaît.
 
-**Étape 3 — volatilité et VaR.** Avec un `verifier` qui attrape l'erreur classique, `quantile(0.95)` au lieu de `quantile(0.05)`. Et la consigne de **traduire la VaR en euros** sur 10 000 € — c'est la phrase qu'un comité attend, pas le pourcentage.
+**Étape 2, les quatre indicateurs.** Moyenne, médiane, volatilité, VaR — en un tableau qui dit pour chacun ce qu'il mesure. Un `verifier` attrape `quantile(0.95)` au lieu de `0.05`. La consigne demande de traduire la VaR en euros.
 
-**Étape 4 — part de jours de hausse.** En pourcentage, avec un `verifier` qui attrape l'oubli du `* 100`. Puis **les cinq tuiles se remplissent**, et le notebook fait remarquer ce que la fonction a annualisé toute seule.
+**Étape 3, la forme des journées et le pire jour.** C'est ici qu'on enseigne `idxmin` et `.loc`, en trois cellules. La paire `min`/`idxmin` est énoncée. `part_hausse` a un `verifier` qui attrape l'oubli du `* 100`.
 
-**Étape 5 — le pire jour et sa date.** C'est ici qu'on enseigne `idxmin` et `.loc`, les deux seules nouveautés du notebook, en trois cellules : `min` donne la valeur, `idxmin` donne la ligne, `.loc[ligne, colonne]` va lire la case. La paire `min`/`idxmin` et `max`/`idxmax` est énoncée.
+**Étape 4, le classement des sept.** Le premier volet est complet.
 
-**Étape 6 — le classement des sept.** Sur `crypto`, pas sur `t` — et le piège est signalé : `crypto` n'a pas encore de colonne `r`.
+### Second volet — l'idée de stratégie
 
-**La fiche complète.**
+Amené par la citation du forum : *« le cours rebondit après une grosse baisse, il suffit d'acheter le lendemain »*. L'étudiant a noté son intuition en tête de notebook.
 
-**Étape 7 — lire sa fiche.** Trois questions en texte : recommandez-vous la ligne et à quelle taille ; quel est le chiffre le moins fiable et pourquoi (le rendement moyen — la séance 6 a mesuré son épaisseur) ; qu'est-ce qui, dans cette fiche, a une chance de valoir pour demain (la volatilité persiste, le rendement moyen ne prédit rien — c'est la charnière vers le bloc ML).
+**Étape 5, `r_hier` et les deux paquets.** `shift` appliqué au rendement, par monnaie. Deux paquets complémentaires, vérifiés comme tels. Les moyennes tombent : le lendemain rapporte plusieurs fois une journée ordinaire. Le verdict reste « EN ATTENTE ».
 
-**Pour finir — la petite application.** `fiche_de(code)` est fournie : ce sont leurs lignes, rassemblées. Ils la lisent et doivent tout reconnaître. Puis un champ de saisie `ipywidgets` avec bouton, qui appelle `fiche_de`. Une note dit que si le champ n'apparaît pas, `fiche_de("BTC")` marche de toute façon.
+**Étape 6, l'épaisseur.** Bootstrap de **l'écart entre les deux paquets**, pas de la seule moyenne du premier — sinon l'intervalle et le test t répondent à deux questions différentes et se contredisent. Deux tirages par tour, une différence rangée.
 
-> `def` n'est pas au programme du bloc 1 : c'est pourquoi `fiche_de` est **fournie** et non demandée. Le bénéfice reste entier — ils voient leur propre travail généralisé.
+**Étape 7, le test t.** Le verdict tombe.
 
-## 4. Valeurs de référence
+**Étape 8, la grille.** 28 tests fournis, 7 passent là où le hasard en prédit 1,4.
 
-Recalculées et vérifiées sur `crypto.csv` le 16 septembre 2026. **Quatre VaR et une médiane de la version précédente de ce document étaient fausses** ; voici les bonnes.
+**Étape 9, la seule preuve.** ADA passe aux quatre seuils. On coupe son histoire en deux : p = 0,003 sur la première moitié, **p = 0,047 sur la seconde, jamais consultée**. L'effet tient. Le bitcoin, lui, donne 0,221 puis 0,834. C'est la charnière vers le bloc ML.
+
+**Pour finir.** `fiche_de(code)` fournie — leurs lignes rassemblées — puis le champ de saisie `ipywidgets`.
+
+## 4. Deux choix à connaître
+
+**Le bootstrap porte sur l'écart.** Première version : bootstrap de la seule moyenne du paquet « après baisse ». Sur SOL, l'intervalle excluait zéro (verdict « effet détecté ») alors que p = 0,20. Les deux répondaient à des questions différentes — « le gain diffère-t-il de zéro » contre « diffère-t-il des autres jours ». Corrigé : le bootstrap porte sur la différence, et les deux méthodes s'accordent sur six monnaies sur sept.
+
+**La septième est `DOGE`**, où l'intervalle exclut zéro mais p = 0,099. Ce n'est pas un bug : le test t suppose que les moyennes se comportent normalement, et le +354 % de janvier 2021 casse cette supposition. Le notebook le dit explicitement, en encadré — c'est l'intervalle qu'il faut croire, et la divergence est elle-même un signal. C'est une bonne leçon, pas un défaut.
+
+## 5. Valeurs de référence
+
+Recalculées et vérifiées sur `crypto.csv` le 16 septembre 2026.
 
 | monnaie | jours | moyenne | médiane | volatilité | VaR 95 % | % hausse | pire jour | date |
 |---|---|---|---|---|---|---|---|---|
@@ -69,20 +83,31 @@ Recalculées et vérifiées sur `crypto.csv` le 16 septembre 2026. **Quatre VaR 
 | BNB | 3 164 | +0,25 | +0,10 | 4,78 | −6,20 | 52,0 | −41,90 | 2020-03-12 |
 | ADA | 3 164 | +0,10 | −0,11 | 5,39 | −7,81 | 48,5 | −39,39 | 2020-03-12 |
 
-> **SOL est la monnaie par défaut du notebook.** Rendement moyen le plus élevé des sept (+0,39 %/jour, soit +314 % par an) et pourtant **médiane négative** : elle baisse plus d'un jour sur deux. L'écart entre moyenne et médiane, simple notion en séance 5, devient ici le cœur de l'avis à rendre. XRP et ADA donnent le même effet, DOGE en plus brutal.
+**Le rebond, seuil −5 %** — intervalle de l'écart et p-value :
 
-Toutes les cellules `verifier` sont **relationnelles** : elles recalculent la valeur attendue sur la monnaie choisie plutôt que de comparer à une constante. Le notebook fonctionne donc pour les sept.
+| monnaie | occasions | écart mesuré | intervalle | p | verdict |
+|---|---|---|---|---|---|
+| BTC | 166 | +0,44 | [−0,26 ; +1,24] | 0,242 | on ne peut pas conclure |
+| SOL | 298 | +0,63 | [−0,33 ; +1,57] | 0,203 | on ne peut pas conclure |
+| DOGE | 339 | +1,87 | [+0,20 ; +4,35] | 0,099 | *les deux méthodes divergent* |
+| ADA | 365 | **+1,24** | **[+0,56 ; +1,86]** | **0,000** | effet détecté |
 
-## 5. Vérifications passées
+**Hors échantillon, ADA** — première moitié p = 0,003, seconde moitié p = 0,047. **BTC** — 0,221 puis 0,834.
 
-Exécuté de bout en bout avec `sol_a3.json` : 24 cellules de code, **15 `verifier` sur 15 au vert**, aucune erreur. Build idempotent, aucune sortie enregistrée, aucune cellule affichant un type numpy.
+Toutes les cellules `verifier` sont **relationnelles** : elles recalculent l'attendu sur la monnaie choisie. Le notebook fonctionne pour les sept.
 
-Le champ de saisie se construit sans erreur hors Colab, mais **son rendu dans Colab n'a pas été testé** — ça demande un vrai notebook. C'est la raison de la note de repli, et la raison pour laquelle il est en dernière position.
+## 6. Vérifications passées
 
-## 6. Ce qui reste ouvert
+Exécuté de bout en bout avec `sol_a3.json` : 33 cellules de code, **26 `verifier` sur 26 au vert**, aucune erreur. Build idempotent, aucune sortie enregistrée, aucune cellule affichant un type numpy.
 
-**L'attribution de la monnaie.** Le notebook laisse choisir, avec `SOL` par défaut. Si vous préférez attribuer, il suffit de changer une ligne et la consigne autour.
+Le champ de saisie se construit sans erreur hors Colab, mais **son rendu dans Colab n'a pas été testé**. D'où la note de repli et sa position en dernier.
 
-**La couleur de la tuile « rendement médian »**, rouge quand la valeur est négative — le cas de SOL, XRP et ADA. Je l'ai gardée : sur une fiche de risque, un rendement médian négatif *est* une alerte, et le contraste avec le rendement moyen vert est exactement ce qu'on veut faire voir. À dire si vous voulez du neutre.
+## 7. Ce qui reste ouvert
 
-**Le temps.** Sept étapes, six cellules à écrire, aucune longue. À vue de nez 45 min à 1h. À confirmer sur un vrai étudiant.
+**Le temps.** Huit cellules à écrire, dont deux longues (les quatre indicateurs, les deux paquets) et une lente (le bootstrap). J'estime **60 à 75 minutes**, donc au-dessus des 30-45 min visées au départ — mais c'est le prix de la fusion des deux séances. Si c'est trop, l'étape 4 (le classement) et l'étape 3 (la part de hausse) sont les plus faciles à fournir.
+
+**L'attribution de la monnaie.** Libre, `SOL` par défaut. Noter que le verdict du second volet **dépend de la monnaie choisie** : quatre donnent « on ne peut pas conclure », ADA donne « effet détecté », DOGE fait diverger les deux méthodes. C'est une richesse, mais ça veut dire que tous les étudiants n'auront pas la même conclusion — à annoncer en classe.
+
+**La couleur de la tuile « rendement médian »**, rouge quand la valeur est négative. Gardée : sur une fiche de risque, c'est bien une alerte.
+
+**`//` dans l'étape 9.** La division entière a été écartée du programme Python ; je l'emploie en l'expliquant en une incise. Dites-moi si vous préférez que la ligne de découpage soit fournie.

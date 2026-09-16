@@ -1,8 +1,10 @@
 {
- "11": "crypto[\"r\"] = crypto.groupby(\"coin\")[\"close\"].pct_change() * 100\nt = crypto.query(\"coin == @MONNAIE\").dropna(subset=[\"r\"])\nprint(len(t))",
- "17": "rendement_moyen = t[\"r\"].mean()\nrendement_median = t[\"r\"].median()\nprint(rendement_moyen, rendement_median)",
- "21": "volatilite = t[\"r\"].std()\nvar_95 = t[\"r\"].quantile(0.05)\nprint(volatilite, var_95)",
- "25": "part_hausse = (t[\"r\"] > 0).mean() * 100\nprint(part_hausse)",
- "35": "pire_jour = t[\"r\"].min()\ndate_pire = t.loc[t[\"r\"].idxmin(), \"date\"].date()\nprint(pire_jour, date_pire)",
- "38": "crypto[\"r\"] = crypto.groupby(\"coin\")[\"close\"].pct_change() * 100\nclassement = crypto.groupby(\"coin\")[\"r\"].std().sort_values()\nprint(classement)"
+ "10": "crypto[\"r\"] = crypto.groupby(\"coin\")[\"close\"].pct_change() * 100\nt = crypto.query(\"coin == @MONNAIE\").dropna(subset=[\"r\"])\nprint(len(t))",
+ "16": "rendement_moyen = t[\"r\"].mean()\nrendement_median = t[\"r\"].median()\nvolatilite = t[\"r\"].std()\nvar_95 = t[\"r\"].quantile(0.05)\nprint(rendement_moyen, rendement_median, volatilite, var_95)",
+ "26": "part_hausse = (t[\"r\"] > 0).mean() * 100\npire_jour = t[\"r\"].min()\ndate_pire = t.loc[t[\"r\"].idxmin(), \"date\"].date()\nprint(part_hausse, pire_jour, date_pire)",
+ "29": "classement = crypto.groupby(\"coin\")[\"r\"].std().sort_values()\nprint(classement)",
+ "35": "crypto[\"r_hier\"] = crypto.groupby(\"coin\")[\"r\"].shift(1)\nm = crypto.query(\"coin == @MONNAIE\").dropna(subset=[\"r\", \"r_hier\"])\napres_baisse = m.query(\"r_hier < -5\")[\"r\"]\nautres_jours = m.query(\"r_hier >= -5\")[\"r\"]\nnb_occasions = len(apres_baisse)\ngain_moyen = apres_baisse.mean()\ngain_autres = autres_jours.mean()\nprint(nb_occasions, gain_moyen, gain_autres)",
+ "40": "ecarts = []\nfor i in range(1000):\n    m1 = apres_baisse.sample(len(apres_baisse), replace=True, random_state=i).mean()\n    m2 = autres_jours.sample(len(autres_jours), replace=True, random_state=i).mean()\n    ecarts.append(m1 - m2)\n\nboot = pd.Series(ecarts)\nborne_basse = boot.quantile(0.025)\nborne_haute = boot.quantile(0.975)\nprint(borne_basse, borne_haute)",
+ "43": "p_value = stats.ttest_ind(apres_baisse, autres_jours, equal_var=False).pvalue\nprint(p_value)",
+ "53": "ada = crypto.query(\"coin == 'ADA'\").dropna(subset=[\"r\", \"r_hier\"])\nmoitie1 = ada.head(len(ada) // 2)\nmoitie2 = ada.tail(len(ada) - len(ada) // 2)\np1 = stats.ttest_ind(moitie1.query(\"r_hier < -5\")[\"r\"], moitie1.query(\"r_hier >= -5\")[\"r\"], equal_var=False).pvalue\np2 = stats.ttest_ind(moitie2.query(\"r_hier < -5\")[\"r\"], moitie2.query(\"r_hier >= -5\")[\"r\"], equal_var=False).pvalue\nprint(p1, p2)"
 }
