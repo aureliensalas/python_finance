@@ -166,7 +166,7 @@ code('sale["volume"].isna()')
 
 md("Compter, comme à la séance 3 :")
 
-code('sale["volume"].isna().sum()')
+code('print(sale["volume"].isna().sum())')
 
 md("Sur la table entière, une réponse par colonne :")
 
@@ -226,8 +226,8 @@ jouet2["volume"] = pd.Series([20, np.nan, 5, 25, np.nan, 4])
 jouet2
 """)
 
-predire('jouet2["volume"].isna()', 'jouet2["volume"].isna().sum()', 'len(jouet2.dropna(subset=["volume"]))',
-        'jouet2.dropna(subset=["volume"])["volume"].sum()')
+predire('jouet2["volume"].isna()', 'print(jouet2["volume"].isna().sum())', 'len(jouet2.dropna(subset=["volume"]))',
+        'print(jouet2.dropna(subset=["volume"])["volume"].sum())')
 
 md("""
 ### Écrire
@@ -249,7 +249,7 @@ md("""
 `duplicated()` pose une question à chaque ligne : « t'ai-je déjà vue plus haut ? ». Une Series de `bool`, encore.
 """)
 
-code("net.duplicated().sum()")
+code("print(net.duplicated().sum())")
 
 md("### Réparez-le vous-même")
 
@@ -340,7 +340,7 @@ net.info()
 
 md("`close` est passé en `float64`. Le maximum a maintenant un sens.")
 
-code('net["close"].max()')
+code('print(net["close"].max())')
 
 md("""
 ### Prédire
@@ -355,7 +355,7 @@ jouet3
 """)
 
 predire('jouet3["close"].str.replace(" ", "")',
-        'jouet3["close"].str.replace(" ", "").str.replace(",", ".").astype(float).sum()')
+        'print(jouet3["close"].str.replace(" ", "").str.replace(",", ".").astype(float).sum())')
 
 md("### Corriger")
 
@@ -505,7 +505,7 @@ La section la plus importante du bloc. On y va pas à pas, sur `jouet` d'abord.
 « Le cours moyen de chaque monnaie. » Trois monnaies dans `jouet`, trois moyennes. Avec ce qu'on sait, on écrit un `query` par monnaie :
 """)
 
-code("""jouet.query("coin == 'BTC'")["close"].mean()""")
+code("""print(jouet.query("coin == 'BTC'")["close"].mean())""")
 
 md("""
 Trois fois. Sept fois sur le vrai fichier. Non : **une boucle**.
@@ -597,13 +597,13 @@ md("### Trier le résultat, aller chercher un groupe")
 
 code('crypto.groupby("coin")["close"].mean().sort_values(ascending=False)')
 
-code('crypto.groupby("coin")["close"].mean()["ETH"]')
+code('print(crypto.groupby("coin")["close"].mean()["ETH"])')
 
 md("### Prédire")
 
 predire('jouet.groupby("coin")["volume"].sum()', 'jouet.groupby("date")["volume"].sum()',
         'jouet.groupby("coin")["close"].count()', 'jouet.groupby("coin")["close"].max().sort_values()',
-        'jouet.groupby("coin")["close"].mean()["ETH"]',
+        'print(jouet.groupby("coin")["close"].mean()["ETH"])',
         'jouet.groupby("coin")["close"].max() - jouet.groupby("coin")["close"].min()')
 
 md("""

@@ -438,10 +438,10 @@ La forme devient **`alias.fonction(arguments)`**.
 code("""
 import numpy as np
 
-np.sqrt(2)
+print(np.sqrt(2))
 """)
 
-code("np.log(1.05)")
+code("print(np.log(1.05))")
 
 md("""
 À la séance pandas, `pd.read_csv(...)` aura exactement cette forme.
@@ -1201,9 +1201,9 @@ code("pd.Series([1, 2, 3]) * 2")
 
 md("Les méthodes d'une Series : les mêmes noms que les fonctions sur les listes.")
 
-code("serie.mean()")
+code("print(serie.mean())")
 
-code("serie.max()")
+code("print(serie.max())")
 
 md("Et un graphique, en une ligne.")
 

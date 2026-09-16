@@ -142,7 +142,7 @@ code("prix * 2")
 
 code("prix / 1000")
 
-code("prix.sum(), prix.max(), prix.min(), prix.mean()")
+code("print(prix.sum(), prix.max(), prix.min(), prix.mean())")
 
 md("""
 Une comparaison, qui donnait un `bool` sur une valeur, donne **une Series de `bool`** : une réponse par étiquette.
@@ -152,11 +152,11 @@ code("prix > 1000")
 
 md("`True` vaut 1. Donc `.sum()` compte les `True`, et `.mean()` donne leur part.")
 
-code("(prix > 1000).sum(), (prix > 1000).mean()")
+code("print((prix > 1000).sum(), (prix > 1000).mean())")
 
 md("### Prédire")
 
-predire('prix["SOL"]', "prix * 1000", "prix < 1", "(prix < 1).sum()", "prix.max() - prix.min()")
+predire('print(prix["SOL"])', "prix * 1000", "prix < 1", "print((prix < 1).sum())", "print(prix.max() - prix.min())")
 
 # ---------------------------------------------------------------- 2. DataFrame
 md("""
@@ -209,7 +209,7 @@ code('jouet["close"] * 2')
 
 code('jouet["close"] * jouet["volume"]')
 
-code('jouet["close"].max(), jouet["volume"].sum(), jouet["close"].mean()')
+code('print(jouet["close"].max(), jouet["volume"].sum(), jouet["close"].mean())')
 
 md("""
 Colonne et nombre, colonne et colonne, fonction de colonne : les trois formes vues sur `prix`.
@@ -232,8 +232,8 @@ code('(jouet["close"] / 1000).round(1)')
 
 md("### Prédire")
 
-predire('jouet["volume"]', 'jouet["close"] / 1000', 'jouet["close"] > 1000', '(jouet["close"] > 1000).sum()',
-        'jouet["volume"].sum()', 'jouet["close"].mean()', 'jouet["montant"].max()', 'jouet[["coin", "montant"]]')
+predire('jouet["volume"]', 'jouet["close"] / 1000', 'jouet["close"] > 1000', 'print((jouet["close"] > 1000).sum())',
+        'print(jouet["volume"].sum())', 'print(jouet["close"].mean())', 'print(jouet["montant"].max())', 'jouet[["coin", "montant"]]')
 
 md("""
 ### Prédire la forme
@@ -241,7 +241,7 @@ md("""
 Avant d'exécuter, dites à voix haute : **Series, DataFrame, ou un nombre ? Combien de lignes ?**
 """)
 
-predire('jouet["coin"]', 'jouet[["coin", "close"]]', 'jouet["close"] * 2', 'jouet["close"].max()')
+predire('jouet["coin"]', 'jouet[["coin", "close"]]', 'jouet["close"] * 2', 'print(jouet["close"].max())')
 
 md("""
 ### Écrire
@@ -395,9 +395,9 @@ code('crypto["close"] > 100000')
 
 md("`.sum()` compte les `True`. `.mean()` donne leur part.")
 
-code('(crypto["close"] > 100000).sum()')
+code('print((crypto["close"] > 100000).sum())')
 
-code('(crypto["coin"] == "BTC").mean()')
+code('print((crypto["coin"] == "BTC").mean())')
 
 md("""
 La première ligne répond à « combien de jours au-dessus de 100 000 dollars, toutes monnaies confondues ». La seconde à « quelle part du fichier concerne BTC ».
@@ -494,17 +494,17 @@ crypto.query("coin == 'ETH'")["close"].max()
 ```
 """)
 
-code("""crypto.query("coin == 'ETH'")["close"].max()""")
+code("""print(crypto.query("coin == 'ETH'")["close"].max())""")
 
 md("### Prédire")
 
 predire("""jouet.query("coin == 'SOL'")""",
         """len(jouet.query("volume > 10"))""",
         """jouet.query("coin == 'ETH' and close > 2350")""",
-        """jouet.query("coin in ['BTC', 'SOL']")["volume"].sum()""",
-        """jouet.query("not coin == 'BTC'")["close"].max()""",
+        """print(jouet.query("coin in ['BTC', 'SOL']")["volume"].sum())""",
+        """print(jouet.query("not coin == 'BTC'")["close"].max())""",
         """jouet.query("close < 0")""",
-        """jouet.query("coin == 'BTC'")["close"].mean()""",
+        """print(jouet.query("coin == 'BTC'")["close"].mean())""",
         """jouet.query("volume >= 10 or close < 100")""")
 
 md("""
@@ -515,11 +515,11 @@ Une table vide, comme à l'avant-dernière cellule, n'est pas une erreur : aucun
 Pour chaque ligne, à l'oral : à quelle question répond-elle ?
 """)
 
-code("""crypto.query("coin == 'DOGE'")["volume"].mean()""")
+code("""print(crypto.query("coin == 'DOGE'")["volume"].mean())""")
 
 code("""len(crypto.query("close > 1000"))""")
 
-code("""crypto.query("coin == 'BTC' and date >= '2024-01-01'")["close"].min()""")
+code("""print(crypto.query("coin == 'BTC' and date >= '2024-01-01'")["close"].min())""")
 
 code("""crypto.query("coin in ['SOL', 'ADA']").shape""")
 

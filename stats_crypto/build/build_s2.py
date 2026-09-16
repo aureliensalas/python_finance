@@ -131,7 +131,7 @@ On fabrique cette population, et on regarde la vérité — celle qu'un vrai son
 
 code("""
 electeurs = pd.Series(np.random.default_rng(0).random(100_000) < 0.52).astype(int)
-electeurs.mean()
+print(electeurs.mean())
 """)
 
 md("""
@@ -139,7 +139,7 @@ md("""
 """)
 
 code("""
-electeurs.sample(2000, random_state=0).mean()
+print(electeurs.sample(2000, random_state=0).mean())
 """)
 
 md("""
@@ -150,8 +150,8 @@ md("""
 Deux autres sondages, `random_state=1` et `random_state=2`. Au-dessus ou en dessous de 50 % ?
 """)
 
-predire("electeurs.sample(2000, random_state=1).mean()",
-        "electeurs.sample(2000, random_state=2).mean()")
+predire("print(electeurs.sample(2000, random_state=1).mean())",
+        "print(electeurs.sample(2000, random_state=2).mean())")
 
 md("""
 **Le résultat du sondage dépend de qui on a interrogé.** Personne dans la salle ne conteste que c'est de l'incertitude. Elle a un nom : l'**incertitude d'échantillonnage**.
@@ -171,7 +171,7 @@ sondages.plot(kind="hist", bins=40, title="1000 sondages de 2000 personnes", xla
 """)
 
 code("""
-sondages.min(), sondages.max(), (sondages < 50).sum()
+print(sondages.min(), sondages.max(), (sondages < 50).sum())
 """)
 
 md("""
@@ -262,7 +262,7 @@ On garde les **95 % centraux** de ces mille moyennes : on écarte les 2,5 % les 
 code("""
 bas = boot.quantile(0.025)
 haut = boot.quantile(0.975)
-bas, haut
+print(bas, haut)
 """)
 
 md("""
@@ -270,7 +270,7 @@ md("""
 """)
 
 code("""
-((1 + bas / 100) ** 365 - 1) * 100, ((1 + haut / 100) ** 365 - 1) * 100
+print(((1 + bas / 100) ** 365 - 1) * 100, ((1 + haut / 100) ** 365 - 1) * 100)
 """)
 
 md("""
@@ -313,15 +313,16 @@ Le bitcoin contre l'ether. `stats.ttest_ind` prend les deux colonnes.
 
 code("""
 eth = crypto.query("coin == 'ETH'")
-stats.ttest_ind(btc["r"], eth["r"], equal_var=False)
+resultat = stats.ttest_ind(btc["r"], eth["r"], equal_var=False)
+print(resultat.statistic, resultat.pvalue)
 """)
 
 md("""
-Deux nombres. Celui qui nous intéresse est `pvalue`.
+Le test renvoie **deux nombres**. Celui qui nous intéresse est le second, la **p-value** — on y accède par `.pvalue`.
 """)
 
 code("""
-stats.ttest_ind(btc["r"], eth["r"], equal_var=False).pvalue
+print(stats.ttest_ind(btc["r"], eth["r"], equal_var=False).pvalue)
 """)
 
 md("""
@@ -346,7 +347,7 @@ Deux choses qu'une p-value **n'est pas**, parce que c'est l'erreur universelle :
 code("""
 jeudi = btc.query("jour_sem == 3")["r"]
 autres = btc.query("jour_sem != 3")["r"]
-stats.ttest_ind(jeudi, autres, equal_var=False).pvalue
+print(stats.ttest_ind(jeudi, autres, equal_var=False).pvalue)
 """)
 
 md("""
@@ -359,8 +360,8 @@ Ne répondez pas encore. Deux sections avant de trancher.
 ### Prédire
 """)
 
-predire('stats.ttest_ind(btc["r"], btc["r"], equal_var=False).pvalue',
-        'stats.ttest_ind(crypto.query("coin == \'BTC\'")["r"], crypto.query("coin == \'DOGE\'")["r"], equal_var=False).pvalue < 0.05')
+predire('print(stats.ttest_ind(btc["r"], btc["r"], equal_var=False).pvalue)',
+        'print(stats.ttest_ind(crypto.query("coin == \'BTC\'")["r"], crypto.query("coin == \'DOGE\'")["r"], equal_var=False).pvalue < 0.05)')
 
 # ---------------------------------------------------------------- 4. Significatif ≠ important
 md("""
@@ -455,8 +456,8 @@ BTC et ETH : **0,82**. La plus faible, SOL et DOGE : 0,25. La corrélation moyen
 ### Prédire
 """)
 
-predire('rendements["BTC"].corr(rendements["ETH"])',
-        'rendements["BTC"].corr(rendements["BTC"])')
+predire('print(rendements["BTC"].corr(rendements["ETH"]))',
+        'print(rendements["BTC"].corr(rendements["BTC"]))')
 
 md("""
 ### La question laissée ouverte à la séance 5
@@ -558,7 +559,7 @@ Si le jour de la semaine ne changeait rien, chaque ligne aurait à peu près les
 
 code("""
 khi2, p, _, attendus = stats.chi2_contingency(tableau)
-p
+print(p)
 """)
 
 md("""
@@ -580,7 +581,7 @@ On le vérifie en retirant le week-end :
 code("""
 ouvres = btc.query("jour_sem <= 4")
 tableau_ouvres = pd.crosstab(ouvres["jour_sem"], ouvres["tranche"])
-stats.chi2_contingency(tableau_ouvres)[1]
+print(stats.chi2_contingency(tableau_ouvres)[1])
 """)
 
 md("""

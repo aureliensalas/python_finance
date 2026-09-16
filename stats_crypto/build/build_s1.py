@@ -195,21 +195,25 @@ On applique, et on prend **un seul réflexe : regarder le maximum**.
 
 code("""
 crypto["r"] = crypto["close"].pct_change() * 100
-crypto["r"].max()
+print(crypto["r"].max())
 """)
 
 md("""
 **933 041 %.** Aucun actif n'a jamais fait ça en une journée. Quelque chose est faux — et rien ne le disait dans les cinq premières lignes.
 
-D'où ça vient : la table est triée par monnaie puis par date. À chaque **changement de monnaie**, `pct_change` compare le premier jour de l'une au dernier jour de l'autre. Voici les lignes en cause :
+D'où ça vient : la table est triée par monnaie puis par date. À chaque **changement de monnaie**, `pct_change` compare le premier jour de l'une au dernier jour de l'autre. Ça produit des valeurs énormes dans **les deux sens** : regardons les trois plus hautes et les trois plus basses.
 """)
 
 code("""
-crypto.sort_values("r", ascending=False).head(6)[["date", "coin", "close", "r"]]
+hautes = crypto.sort_values("r", ascending=False).head(3)[["date", "coin", "close", "r"]]
+basses = crypto.sort_values("r").head(3)[["date", "coin", "close", "r"]]
+display(hautes, basses)
 """)
 
 md("""
-Six lignes fausses sur 21 325, une par frontière. Invisibles à l'œil dans un aperçu, catastrophiques dans un maximum, et elles auraient contaminé toutes les moyennes du cours.
+`display` affiche plusieurs tables l'une sous l'autre dans une même cellule ; la dernière expression, elle, n'en afficherait qu'une.
+
+Ces six lignes sont **exactement** les six frontières : six changements de monnaie pour sept monnaies, toutes au premier jour de la monnaie suivante. Invisibles à l'œil dans un aperçu, catastrophiques dans un maximum, et elles auraient contaminé toutes les moyennes du cours.
 
 > **L'erreur silencieuse de cette séance.** Elle ne lève aucune exception. Elle ne se voit pas dans `head()`. Elle se trouve en regardant les extrêmes. **Après avoir créé une colonne, on regarde son `max` et son `min` avant de s'en servir.**
 
@@ -220,7 +224,7 @@ Il faut que le calcul reparte de zéro à chaque monnaie. C'est exactement ce qu
 
 code("""
 crypto["r"] = crypto.groupby("coin")["close"].pct_change() * 100
-crypto["r"].max()
+print(crypto["r"].max())
 """)
 
 md("""
@@ -236,8 +240,8 @@ len(crypto)
 
 md("### Prédire")
 
-predire('crypto["r"].min() < -30',
-        'crypto.query("coin == \'DOGE\'")["r"].max()',
+predire('print(crypto["r"].min() < -30)',
+        'print(crypto.query("coin == \'DOGE\'")["r"].max())',
         'len(crypto.query("r > 100"))')
 
 # ---------------------------------------------------------------- 2. Une journée de bitcoin
@@ -249,7 +253,7 @@ Une seule question, et la réponse va surprendre. On isole le bitcoin, et on dem
 
 code("""
 btc = crypto.query("coin == 'BTC'")
-btc["r"].mean()
+print(btc["r"].mean())
 """)
 
 md("""
@@ -281,7 +285,7 @@ md("""
 """)
 
 code("""
-btc["r"].quantile(0.05)
+print(btc["r"].quantile(0.05))
 """)
 
 md("""
@@ -292,9 +296,9 @@ Ce nombre a un nom : c'est une **Value at Risk** à 95 %, l'indicateur que toute
 ### Prédire
 """)
 
-predire('btc["r"].quantile(0.5) == btc["r"].median()',
-        'btc["r"].quantile(0.01) < btc["r"].quantile(0.05)',
-        '(btc["r"] > 0).mean()')
+predire('print(btc["r"].quantile(0.5) == btc["r"].median())',
+        'print(btc["r"].quantile(0.01) < btc["r"].quantile(0.05))',
+        'print((btc["r"] > 0).mean())')
 
 md("""
 ### Écrire
@@ -376,7 +380,7 @@ Le +354 % du dogecoin. Retirons-le par la pensée :
 """)
 
 code("""
-crypto.query("annee == 2021 and r < 300")["r"].std()
+print(crypto.query("annee == 2021 and r < 300")["r"].std())
 """)
 
 md("""
@@ -461,7 +465,7 @@ L'histogramme des rendements du bitcoin. C'est le graphique le plus important du
 """)
 
 code("""
-btc["r"].plot(kind="hist", bins=60, title="Rendements quotidiens du bitcoin", xlabel="% par jour", figsize=(8, 4))
+btc["r"].plot(kind="hist", bins=40, title="Rendements quotidiens du bitcoin", xlabel="% par jour", figsize=(8, 4))
 """)
 
 md("""
@@ -473,11 +477,11 @@ Combien de jours sont à plus de trois écarts-types de la moyenne ?
 """)
 
 code("""
-(btc["r"].abs() > 3 * btc["r"].std()).sum()
+print((btc["r"].abs() > 3 * btc["r"].std()).sum())
 """)
 
 md("""
-**62 jours.** Si les rendements suivaient la cloche parfaite qu'on apprend en cours de mathématiques, on en attendrait **8** ou 9. Sept fois trop.
+**62 jours.** Si les rendements suivaient la cloche parfaite qu'on apprend en cours de mathématiques, on en attendrait **8**. Sept fois trop.
 
 > **Les marchés ne sont pas gaussiens.** Les journées extrêmes sont beaucoup plus fréquentes que la cloche ne le prédit, et toujours plus violentes à la baisse. C'est pour cela que les modèles de risque se trompent tous dans le même sens : ils sous-estiment le pire. Retenez l'image : la cloche est là, mais **ses queues sont grasses**.
 
@@ -515,35 +519,9 @@ md("""
 Comparez au graphique du bitcoin : une cloche beaucoup plus large, et une queue droite qui part très loin. Le risque de DOGE, c'est cette largeur.
 """)
 
-# ---------------------------------------------------------------- 5. Fiche d'identité
+# ---------------------------------------------------------------- 5. Synthèse
 md("""
-## 5. La fiche d'identité d'une monnaie
-
-Tout ce qui précède, en un exercice. Quand on demande à un analyste « parle-moi de cet actif », il donne cinq nombres — et il sait ce que chacun veut dire.
-
-Choisissez une monnaie, puis affichez en f-strings : son rendement moyen et sa médiane, son écart-type, sa VaR à 95 %, sa part de jours de hausse, et son pire jour avec la date.
-
-Rangez chaque nombre dans une variable : `fiche_moyenne`, `fiche_mediane`, `fiche_std`, `fiche_var`, `fiche_hausse`, `fiche_pire`.
-""")
-
-code("""
-monnaie = "SOL"
-""")
-
-code("")
-
-code("""
-t = crypto.query(f"coin == '{monnaie}'")
-verifier("moyenne et mediane", abs(fiche_moyenne - t["r"].mean()) < 1e-6 and abs(fiche_mediane - t["r"].median()) < 1e-6, ".mean() et .median() sur la monnaie choisie")
-verifier("risque", abs(fiche_std - t["r"].std()) < 1e-6, ".std()")
-verifier("VaR", abs(fiche_var - t["r"].quantile(0.05)) < 1e-6, ".quantile(0.05)")
-verifier("part de hausse", abs(fiche_hausse - (t["r"] > 0).mean()) < 1e-6, "(r > 0).mean()")
-verifier("pire jour", abs(fiche_pire - t["r"].min()) < 1e-6, ".min()")
-""")
-
-# ---------------------------------------------------------------- 6. Synthèse
-md("""
-## 6. Ce que vous savez faire
+## 5. Ce que vous savez faire
 
 | Vous voulez... | Vous écrivez |
 |---|---|
@@ -557,7 +535,7 @@ md("""
 | plusieurs mesures par groupe | `df.groupby("coin")["r"].agg(["mean", "std"])` |
 | grouper par une colonne fabriquée | `df["annee"] = df["date"].dt.year`, puis `groupby("annee")` |
 | une part | `(df["r"] > 0).mean()` |
-| la forme d'une colonne | `df["r"].plot(kind="hist", bins=60)` |
+| la forme d'une colonne | `df["r"].plot(kind="hist", bins=40)` |
 | deux mesures côte à côte | `df.groupby(...)["r"].agg([...]).plot(kind="bar")` |
 | habiller | `title=`, `xlabel=` / `ylabel=`, `figsize=` |
 
@@ -572,14 +550,18 @@ md("""
 2. **Jamais un écart-type sans regarder ce qu'il y a dedans.** Un seul jour a déplacé celui de 2021 de 25 %.
 3. **La médiane dit le quotidien, la moyenne dit la durée.** DOGE monte quatre jours sur dix et rapporte le deuxième mieux.
 
+## Le travail noté
+
+Vous allez produire la **fiche d'identité d'une monnaie** : les cinq nombres qu'un analyste donne quand on lui demande « parle-moi de cet actif », présentés comme une vraie fiche. Tout ce qu'il demande est dans cette séance.
+
 ## Pour la prochaine séance
 
 Trois cellules à prédire, une à écrire.
 """)
 
-predire('crypto.groupby("coin")["r"].median()["DOGE"] < 0',
-        'crypto.groupby("annee")["r"].std().max() > 10',
-        'crypto["r"].quantile(0.95) > 5')
+predire('print(crypto.groupby("coin")["r"].median()["DOGE"] < 0)',
+        'print(crypto.groupby("annee")["r"].std().max() > 10)',
+        'print(crypto["r"].quantile(0.95) > 5)')
 
 md("""
 La volatilité (écart-type des rendements) de chaque monnaie **en 2024 seulement**, triée de la plus faible à la plus forte, dans `vol_2024`.

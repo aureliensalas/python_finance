@@ -1,6 +1,6 @@
 {
- "4": "crypto = pd.read_csv(BASE + \"crypto.csv\")\ncrypto[\"date\"] = pd.to_datetime(crypto[\"date\"])\ncrypto = crypto.sort_values([\"coin\", \"date\"]).reset_index(drop=True)\ncrypto[\"r\"] = crypto.groupby(\"coin\")[\"close\"].pct_change() * 100\ncrypto = crypto.dropna(subset=[\"r\"])\ncrypto[\"r\"].max(), len(crypto)",
+ "4": "crypto = pd.read_csv(BASE + \"crypto.csv\")\ncrypto[\"date\"] = pd.to_datetime(crypto[\"date\"])\ncrypto = crypto.sort_values([\"coin\", \"date\"]).reset_index(drop=True)\ncrypto[\"r\"] = crypto.groupby(\"coin\")[\"close\"].pct_change() * 100\ncrypto = crypto.dropna(subset=[\"r\"])\nprint(crypto[\"r\"].max(), len(crypto))",
  "7": "crypto[\"annee\"] = crypto[\"date\"].dt.year\ncrypto[\"jour_sem\"] = crypto[\"date\"].dt.dayofweek\nbtc = crypto.query(\"coin == 'BTC'\")\nlen(btc)",
- "36": "eth_r = crypto.query(\"coin == 'ETH'\")[\"r\"]\nmoyennes_eth = []\nfor i in range(1000):\n    moyennes_eth.append(eth_r.sample(len(eth_r), replace=True, random_state=i).mean())\n\nboot_eth = pd.Series(moyennes_eth)\nbas_eth = boot_eth.quantile(0.025)\nhaut_eth = boot_eth.quantile(0.975)\nbas_eth, haut_eth",
+ "36": "eth_r = crypto.query(\"coin == 'ETH'\")[\"r\"]\nmoyennes_eth = []\nfor i in range(1000):\n    moyennes_eth.append(eth_r.sample(len(eth_r), replace=True, random_state=i).mean())\n\nboot_eth = pd.Series(moyennes_eth)\nbas_eth = boot_eth.quantile(0.025)\nhaut_eth = boot_eth.quantile(0.975)\nprint(bas_eth, haut_eth)",
  "62": "corr_btc = rendements[monnaies].corr()[\"BTC\"].sort_values()\ncorr_btc"
 }

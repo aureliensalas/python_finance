@@ -4,6 +4,8 @@ path, solfile = sys.argv[1], sys.argv[2]
 nb = json.load(open(path))
 sols = json.load(open(solfile))     # {"index": "code"} pour les cellules vides
 ns = {}
+# Colab definit display() ; on le reproduit pour que le test voie la meme chose
+ns["display"] = lambda *args: [print(a) for a in args]
 n_code = 0; failures = []; expected_err = []
 for i, c in enumerate(nb["cells"]):
     if c["cell_type"] != "code": continue
