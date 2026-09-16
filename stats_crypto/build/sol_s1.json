@@ -1,0 +1,11 @@
+{
+ "6": "nb_100k = len(crypto.query(\"coin == 'BTC' and close > 100000\"))\nnb_100k",
+ "9": "cours_moyen = crypto.groupby(\"coin\")[\"close\"].mean()\ncours_moyen",
+ "16": "jouet[\"r\"] = (jouet[\"close\"] - jouet[\"hier\"]) / jouet[\"hier\"] * 100\njouet",
+ "43": "eth = crypto.query(\"coin == 'ETH'\")\neth_moyenne = eth[\"r\"].mean()\neth_mediane = eth[\"r\"].median()\neth_std = eth[\"r\"].std()\neth_var = eth[\"r\"].quantile(0.05)\neth_moyenne, eth_mediane, eth_std, eth_var",
+ "65": "crypto[\"hausse\"] = crypto[\"r\"] > 0\npart_hausse = crypto.groupby(\"coin\")[\"hausse\"].mean()\npart_hausse.sort_values()",
+ "68": "pire_jour = crypto.groupby(\"coin\")[\"r\"].min()\npire_jour",
+ "78": "doge = crypto.query(\"coin == 'DOGE'\")\ndoge[\"r\"].plot(kind=\"hist\", bins=60, title=\"Rendements quotidiens du dogecoin\", xlabel=\"% par jour\", figsize=(8, 4))",
+ "82": "t = crypto.query(f\"coin == '{monnaie}'\")\nfiche_moyenne = t[\"r\"].mean()\nfiche_mediane = t[\"r\"].median()\nfiche_std = t[\"r\"].std()\nfiche_var = t[\"r\"].quantile(0.05)\nfiche_hausse = (t[\"r\"] > 0).mean()\nfiche_pire = t[\"r\"].min()\nprint(f\"{monnaie} : rendement moyen {fiche_moyenne:.2f} % par jour, médiane {fiche_mediane:.2f} %\")\nprint(f\"Risque (écart-type) : {fiche_std:.2f} % par jour\")\nprint(f\"VaR 95 % : {fiche_var:.2f} % (un jour sur vingt perd plus que ça)\")\nprint(f\"Part de jours de hausse : {fiche_hausse:.1%}\")\nprint(f\"Pire jour : {fiche_pire:.1f} %\")",
+ "89": "vol_2024 = crypto.query(\"annee == 2024\").groupby(\"coin\")[\"r\"].std().sort_values()\nvol_2024"
+}

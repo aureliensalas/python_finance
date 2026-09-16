@@ -73,9 +73,22 @@ Source : Yahoo Finance via [yfinance](https://github.com/ranaroussi/yfinance). C
 
 ---
 
-## Bloc 3 — Décrire et relier des données (4h)
+## Bloc 3 — Décrire le risque, et en douter (4h)
 
-*À venir.*
+Deux séances de 2h, sur les mêmes cryptomonnaies. La première construit la colonne qui manquait — le rendement — et apprend à décrire un actif. La seconde apprend à douter d'une moyenne, à comparer deux groupes, et à ne pas se laisser piéger par un résultat trop beau.
+
+| Séance | Sujet | Cours | Correction |
+|---|---|---|---|
+| 3.1 | Décrire le risque — rendement, `describe`, `groupby` sur plusieurs mesures, histogramme | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/stats_crypto/cours/seance1_cours.ipynb) | *après la séance* |
+| 3.2 | Comparer, et douter — bootstrap, intervalle de confiance, test t, tests répétés, corrélation | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/stats_crypto/cours/seance2_cours.ipynb) | *après la séance* |
+
+### Les données du bloc 3
+
+Le fichier `crypto.csv` du bloc 2, plus un seul fichier :
+
+| Fichier | Lignes | Contenu |
+|---|---|---|
+| `rendements.csv` | 2 334 | Une ligne par jour, une colonne par monnaie : le rendement quotidien en %, sur les jours où les sept monnaies sont cotées. Construit par [`stats_crypto/data/build_rendements.py`](stats_crypto/data/build_rendements.py) |
 
 ---
 
@@ -95,6 +108,9 @@ pandas_crypto/cours/     les deux notebooks de cours du bloc 2
 pandas_crypto/assignment/ le travail noté du bloc 2
 pandas_crypto/data/      les CSV et les scripts qui les construisent
 pandas_crypto/build/     les scripts qui génèrent ces notebooks
+stats_crypto/cours/      les deux notebooks de cours du bloc 3
+stats_crypto/data/       le fichier large des rendements et son script
+stats_crypto/build/      les scripts qui génèrent ces notebooks
 ressources/              aide-mémoire, réglages tablette, images
 ```
 

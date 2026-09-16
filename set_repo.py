@@ -27,6 +27,10 @@ FICHIERS = [
     "pandas_crypto/build/build_d1.py",
     "pandas_crypto/build/build_d2.py",
     "pandas_crypto/build/build_a2.py",
+    "stats_crypto/cours/seance1_cours.ipynb",
+    "stats_crypto/cours/seance2_cours.ipynb",
+    "stats_crypto/build/build_s1.py",
+    "stats_crypto/build/build_s2.py",
 ]
 
 
