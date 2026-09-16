@@ -82,6 +82,14 @@ Deux séances de 2h, sur les mêmes cryptomonnaies. La première construit la co
 | 3.1 | Décrire le risque — rendement, `describe`, `groupby` sur plusieurs mesures, histogramme | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/stats_crypto/cours/seance1_cours.ipynb) | *après la séance* |
 | 3.2 | Comparer, et douter — bootstrap, intervalle de confiance, test t, tests répétés, corrélation | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/stats_crypto/cours/seance2_cours.ipynb) | *après la séance* |
 
+### Travail en autonomie — la fiche de risque
+
+À faire après les deux séances, seul. Une fonction de mise en page est fournie ; l'étudiant calcule les cinq indicateurs de risque d'une cryptomonnaie et les voit remplir la fiche au fur et à mesure. Il termine avec une petite application à champ de saisie.
+
+| Sujet | Énoncé |
+|---|---|
+| La fiche de risque | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/stats_crypto/assignment/fiche_de_risque.ipynb) |
+
 ### Les données du bloc 3
 
 Le fichier `crypto.csv` du bloc 2, plus un seul fichier :
@@ -109,6 +117,7 @@ pandas_crypto/assignment/ le travail noté du bloc 2
 pandas_crypto/data/      les CSV et les scripts qui les construisent
 pandas_crypto/build/     les scripts qui génèrent ces notebooks
 stats_crypto/cours/      les deux notebooks de cours du bloc 3
+stats_crypto/assignment/ le travail en autonomie du bloc 3
 stats_crypto/data/       le fichier large des rendements et son script
 stats_crypto/build/      les scripts qui génèrent ces notebooks
 ressources/              aide-mémoire, réglages tablette, images
