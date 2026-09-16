@@ -18,7 +18,9 @@ Initiation à Python, à l'analyse de données et au machine learning pour des �
 | 2 | Manipuler des données avec pandas | 4h |
 | 3 | Décrire et relier des données | 4h |
 | 4 | Introduction au machine learning | 4h |
-| — | Travaux notés et révisions | 4h |
+| — | Travaux en autonomie et révisions | 4h |
+
+Chaque bloc se termine par un **travail en autonomie** : un notebook à faire seul, non noté, où l'on remobilise ce que les séances ont montré sur un cas complet. Les cellules `verifier` y remplacent la correction.
 
 Rien à installer : tout se passe dans **Google Colab**, qui exécute le code sur les serveurs de Google. Il vous faut un compte Google et un navigateur.
 
@@ -32,13 +34,13 @@ Une séance de 2h, en un seul notebook. Il contient les exercices : on montre un
 |---|---|---|---|
 | 1 | Python — expressions, types, variables, fonctions, chaînes, booléens, `if`, listes, `for`, Series | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/python/cours/python_cours.ipynb) | *après la séance* |
 
-### Travail noté — le simulateur de prêt
+### Travail en autonomie — le simulateur de prêt
 
-Lancé en classe, terminé à la maison. À partir de trois champs de formulaire et du taux directeur de la Banque centrale européenne du jour : une mensualité, un verdict d'acceptation, un tableau d'amortissement sur 240 mois, la courbe du capital restant dû et le coût du crédit.
+À faire seul, après la séance. À partir de trois champs de formulaire et du taux directeur de la Banque centrale européenne du jour : une mensualité, un verdict d'acceptation, un tableau d'amortissement sur 240 mois, la courbe du capital restant dû et le coût du crédit.
 
-| Sujet | Énoncé | Correction |
-|---|---|---|
-| Le simulateur de prêt | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/python/assignment/simulateur_pret.ipynb) | *après le rendu* |
+| Sujet | Énoncé |
+|---|---|
+| Le simulateur de prêt | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/python/assignment/simulateur_pret.ipynb) |
 
 ---
 
@@ -51,13 +53,13 @@ Deux séances de 2h, sur huit ans et demi de cours quotidiens de cryptomonnaies.
 | 2.1 | Des Series à la table — charger, calculer, filtrer, trier | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/pandas_crypto/cours/seance1_cours.ipynb) | *après la séance* |
 | 2.2 | Nettoyer et regrouper — valeurs manquantes, doublons, texte, dates, `groupby` | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/pandas_crypto/cours/seance2_cours.ipynb) | *après la séance* |
 
-### Travail noté — l'investissement programmé
+### Travail en autonomie — l'investissement programmé
 
-Lancé en classe, terminé à la maison. Une cliente demande ce qu'aurait donné 100 dollars par mois dans le bitcoin depuis 2020. L'export de données qu'on vous remet n'a pas été relu : il faut le diagnostiquer et le réparer avant de répondre — puis mesurer le résultat, expliquer pourquoi la méthode fonctionne, et comparer les sept monnaies.
+À faire seul, après les deux séances. Une cliente demande ce qu'aurait donné 100 dollars par mois dans le bitcoin depuis 2020. L'export de données qu'on vous remet n'a pas été relu : il faut le diagnostiquer et le réparer avant de répondre — puis mesurer le résultat, expliquer pourquoi la méthode fonctionne, et comparer les sept monnaies.
 
-| Sujet | Énoncé | Correction |
-|---|---|---|
-| L'investissement programmé | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/pandas_crypto/assignment/investissement_programme.ipynb) | *après le rendu* |
+| Sujet | Énoncé |
+|---|---|
+| L'investissement programmé | [▶](https://colab.research.google.com/github/aureliensalas/python_finance/blob/main/pandas_crypto/assignment/investissement_programme.ipynb) |
 
 ### Les données du bloc 2
 
@@ -67,7 +69,7 @@ Les fichiers se chargent **directement depuis le web** : rien à télécharger.
 |---|---|---|
 | `crypto.csv` | 21 325 | Une monnaie un jour : `date`, `coin`, `close`, `volume`. Sept monnaies (BTC, ETH, SOL, DOGE, XRP, BNB, ADA), du 1er janvier 2018 au 31 août 2026 |
 | `crypto_sale.csv` | 2 592 | L'année 2024, **volontairement abîmée** : prix en texte, volumes manquants, doublons, noms de monnaies incohérents |
-| `crypto_export.csv` | 21 445 | Toute la période, **volontairement abîmée** de la même façon, plus quelques prix manquants. C'est l'export « brut » du travail noté |
+| `crypto_export.csv` | 21 445 | Toute la période, **volontairement abîmée** de la même façon, plus quelques prix manquants. C'est l'export « brut » du travail en autonomie |
 
 Source : Yahoo Finance via [yfinance](https://github.com/ranaroussi/yfinance). Construction reproductible par [`pandas_crypto/data/build_data.py`](pandas_crypto/data/build_data.py), puis [`build_export.py`](pandas_crypto/data/build_export.py) pour l'export brut.
 
@@ -110,10 +112,10 @@ Le fichier `crypto.csv` du bloc 2, plus un seul fichier :
 
 ```
 python/cours/            le notebook de cours du bloc 1
-python/assignment/       le travail noté
+python/assignment/       le travail en autonomie du bloc 1
 python/build/            les scripts qui génèrent ces notebooks
 pandas_crypto/cours/     les deux notebooks de cours du bloc 2
-pandas_crypto/assignment/ le travail noté du bloc 2
+pandas_crypto/assignment/ le travail en autonomie du bloc 2
 pandas_crypto/data/      les CSV et les scripts qui les construisent
 pandas_crypto/build/     les scripts qui génèrent ces notebooks
 stats_crypto/cours/      les deux notebooks de cours du bloc 3

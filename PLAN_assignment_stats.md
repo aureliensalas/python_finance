@@ -12,7 +12,7 @@ Données : `crypto.csv`, déjà connu. Aucun nouveau fichier.
 
 Conséquence sur l'écriture : **tout doit pouvoir se faire sans l'enseignant à côté.** Chaque étape dit ce qu'on cherche, pourquoi, et où c'était dans le cours. Elle ne donne jamais la ligne à écrire. Les cellules `verifier` remplacent la correction : un `A REVOIR` porte un indice, pas une sanction.
 
-> Les deux travaux précédents (`simulateur_pret`, `investissement_programme`) sont encore écrits comme des devoirs notés, avec barème. À reprendre dans le même esprit.
+> **Fait le 16 septembre 2026** : les deux travaux précédents (`simulateur_pret`, `investissement_programme`) sont convertis dans le même esprit — plus de barème, plus de points par partie, plus de rendu ni de nom à inscrire. Le README suit.
 
 ## 2. L'idée
 

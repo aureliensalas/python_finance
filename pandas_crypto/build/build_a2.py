@@ -26,20 +26,15 @@ md(f"""
 
 {BADGE}
 
-# Assignment 2 : l'investissement programmé
+# L'investissement programmé
 
-**Travail noté** · lancé en séance, terminé à la maison
+**Travail en autonomie** · bloc 2 · à faire après les deux séances de pandas
 
 > ⚠️ **Avant de taper quoi que ce soit :** *Fichier → Enregistrer une copie dans Drive*. Sinon votre travail sera perdu en fermant l'onglet.
 
-| | |
-|---|---|
-| **Rendu** | ce notebook, toutes les cellules exécutées, [date à fixer] |
-| **Travail** | [seul ou en binôme, à fixer] |
-| **Ressources** | les deux notebooks du bloc pandas et le notebook Python ; rien d'autre n'est nécessaire |
-| **Barème** | 20 points, détaillé partie par partie |
+Ce notebook n'est pas noté. Il sert à vérifier, seul, que vous savez faire ce que les deux séances ont montré — et à répondre pour de bon à une question que tout le monde se pose.
 
-Écrivez votre nom ici : **[nom]**
+Tout ce dont vous avez besoin est dans les notebooks de cours. Rien d'autre.
 """)
 
 md("""
@@ -67,18 +62,9 @@ Tout ce qui est demandé a été vu dans les deux séances pandas, à **une** ex
 ## Comment travailler
 
 - Une idée par cellule. Une cellule qui fait trois choses est difficile à corriger.
-- Après chaque exercice, une cellule `verifier` vous dit si le résultat est bon. Un `A REVOIR` n'enlève pas de points : il vous dit où regarder.
+- Après chaque exercice, une cellule `verifier` vous dit si le résultat est bon. Un `A REVOIR` n'est pas une faute : il vous dit où regarder.
 - Certaines cellules sont **fournies** : un graphique, une mise en forme. Exécutez-les, lisez-les, ne les modifiez pas.
-- Avant de rendre : *Exécution → Redémarrer et tout exécuter*. Tout doit passer sans erreur, de haut en bas.
-
-| Partie | Points |
-|---|---|
-| 1. Le diagnostic | 2 |
-| 2. La réparation | 4 |
-| 3. Le calendrier d'achat | 3 |
-| 4. Ce que ça a coûté, ce que ça vaut | 4 |
-| 5. Pourquoi ça marche | 3 |
-| 6. Les sept monnaies | 4 |
+- Avant de fermer : *Exécution → Redémarrer et tout exécuter*. Tout doit passer sans erreur, de haut en bas.
 
 Exécutez d'abord la cellule de setup.
 """)
@@ -117,11 +103,11 @@ md("""
 
 # ---------------------------------------------------------------- Partie 1
 md("""
-## Partie 1 : le diagnostic (2 points)
+## Partie 1 : le diagnostic
 
 On n'écrit pas un chiffre à une cliente à partir d'une table qu'on n'a pas inspectée. L'inspection est la première chose qu'on fait sur une table qu'on n'a pas construite soi-même (séance 2.1, section 3) — et ici elle n'est pas une formalité : ce qu'elle révèle décide de tout ce qui suit.
 
-### 1a. La forme et les types (1 point)
+### 1a. La forme et les types
 
 Combien de lignes, combien de colonnes, et de quel type est chaque colonne ? Utilisez `shape` et `info()`.
 
@@ -140,7 +126,7 @@ Lisez la sortie d'`info()` et répondez ici :
 - Quelle colonne n'a **pas** le type qu'elle devrait avoir ? Lequel a-t-elle, lequel devrait-elle avoir ? [à compléter]
 - Quelles colonnes ont des valeurs manquantes ? [à compléter]
 
-### 1b. Les catégories et les doublons (1 point)
+### 1b. Les catégories et les doublons
 
 La colonne `coin` est une catégorie : la première question à lui poser est « combien de lignes par catégorie ? » (séance 2.2, section 5).
 
@@ -166,7 +152,7 @@ Quatre défauts : des noms de monnaies écrits de plusieurs façons, des prix en
 
 # ---------------------------------------------------------------- Partie 2
 md("""
-## Partie 2 : la réparation (4 points)
+## Partie 2 : la réparation
 
 On construit `crypto`, la table propre, à partir d'`export`. Un défaut par étape, une vérification après chaque.
 
@@ -178,7 +164,7 @@ crypto = export.copy()
 """)
 
 md("""
-### 2a. Les noms de monnaies (1 point)
+### 2a. Les noms de monnaies
 
 Sept monnaies, vingt-huit façons de les écrire. Harmonisez la colonne `coin` : sans espace autour, en majuscules (séance 2.2, section 5).
 
@@ -193,7 +179,7 @@ verifier("noms propres", sorted(crypto["coin"].unique()) == ["ADA", "BNB", "BTC"
 """)
 
 md("""
-### 2b. Les prix (1 point)
+### 2b. Les prix
 
 Les prix sont écrits à la française, avec une espace pour les milliers, une virgule pour les décimales et le symbole de la devise : `"78 548,63 $"`. Python ne peut rien calculer dessus.
 
@@ -208,7 +194,7 @@ verifier("ordre de grandeur", crypto["close"].max() > 100000 and crypto["close"]
 """)
 
 md("""
-### 2c. Les doublons (1 point)
+### 2c. Les doublons
 
 Une ligne recopiée, c'est un achat compté deux fois. Retirez les doublons (séance 2.2, section 3).
 """)
@@ -221,7 +207,7 @@ verifier("nombre de lignes", len(crypto) == nb_lignes_brut - nb_doublons, "on do
 """)
 
 md("""
-### 2d. Les valeurs manquantes (1 point)
+### 2d. Les valeurs manquantes
 
 Deux colonnes ont des trous. Elles ne se traitent pas de la même façon, et c'est un choix d'analyste, pas une règle mécanique :
 
@@ -248,11 +234,11 @@ md("""
 
 # ---------------------------------------------------------------- Partie 3
 md("""
-## Partie 3 : le calendrier d'achat (3 points)
+## Partie 3 : le calendrier d'achat
 
 La cliente achète le **premier jour de chaque mois**, à partir du **1er janvier 2020**. Il faut isoler ces jours-là.
 
-### 3a. Les dates (1 point)
+### 3a. Les dates
 
 La colonne `date` est du texte. Convertissez-la en vraie date, puis créez trois colonnes `annee`, `mois` et `jour` (séance 2.2, section 6).
 """)
@@ -265,7 +251,7 @@ verifier("trois colonnes", crypto["annee"].min() == 2018 and crypto["mois"].max(
 """)
 
 md("""
-### 3b. Les jours d'achat (2 points)
+### 3b. Les jours d'achat
 
 Construisez `achats` : les lignes de `crypto` qui sont du bitcoin, dont le jour est le 1er, et dont l'année est 2020 ou après. Un seul `query`, trois conditions reliées par `and` (séance 2.1, section 5).
 
@@ -303,9 +289,9 @@ Chaque point est un achat de 100 dollars. Certains sont tout en haut de la courb
 
 # ---------------------------------------------------------------- Partie 4
 md("""
-## Partie 4 : ce que ça a coûté, ce que ça vaut (4 points)
+## Partie 4 : ce que ça a coûté, ce que ça vaut
 
-### 4a. Ce qu'elle a accumulé (2 points)
+### 4a. Ce qu'elle a accumulé
 
 Avec 100 dollars à un prix `close`, on obtient `100 / close` bitcoin. Créez la colonne `achats["quantite"]` (séance 2.1, section 2).
 
@@ -321,11 +307,11 @@ verifier("total bitcoin", abs(total_btc - achats["quantite"].sum()) < 1e-9, "la 
 """)
 
 md("""
-### 4b. Ce que ça vaut aujourd'hui (2 points)
+### 4b. Ce que ça vaut aujourd'hui
 
 Il faut le **dernier cours** connu du bitcoin : celui de la dernière ligne de `crypto` pour cette monnaie.
 
-**La seule nouveauté de ce devoir.** Vous savez prendre le dernier élément d'une liste avec `liste[-1]`. Sur une colonne pandas, ça s'écrit `colonne.iloc[-1]`. C'est tout.
+**La seule nouveauté de ce notebook.** Vous savez prendre le dernier élément d'une liste avec `liste[-1]`. Sur une colonne pandas, ça s'écrit `colonne.iloc[-1]`. C'est tout.
 
 ```python
 crypto.query("coin == 'ETH'")["close"].iloc[-1]     # le dernier cours de l'ether
@@ -358,9 +344,9 @@ Un analyste ne s'arrête pas là. Le chiffre dit *combien* ; il ne dit pas *pour
 
 # ---------------------------------------------------------------- Partie 5
 md("""
-## Partie 5 : pourquoi ça marche (3 points)
+## Partie 5 : pourquoi ça marche
 
-### 5a. Deux prix moyens (1 point)
+### 5a. Deux prix moyens
 
 Deux questions qui se ressemblent et n'ont pas la même réponse :
 
@@ -398,7 +384,7 @@ Le prix moyen payé est **nettement** en dessous du prix moyen du marché — su
 
 **Explication :** [à compléter]
 
-### 5b. D'où vient le bitcoin accumulé (2 points)
+### 5b. D'où vient le bitcoin accumulé
 
 L'explication se vérifie. Regroupez `achats` par année et sommez la colonne `quantite` (séance 2.2, section 7). Rangez le résultat dans `btc_par_annee`, puis tracez-le en barres.
 """)
@@ -422,7 +408,7 @@ Trois années fournissent les trois quarts du bitcoin accumulé : celles où il 
 
 # ---------------------------------------------------------------- Partie 6
 md("""
-## Partie 6 : les sept monnaies (4 points)
+## Partie 6 : les sept monnaies
 
 La cliente aurait pu choisir une autre monnaie. Refaites le calcul pour les sept, et comparez.
 
@@ -481,7 +467,7 @@ plt.show()
 md("""
 La courbe grise monte de 100 en 100, sans surprise. La courbe bleue est la valeur de tout ce qu'elle possède à chaque date. Elle passe **sous** la grise à plusieurs reprises : il y a eu des mois où la cliente était en perte. C'est ce qu'il faut lui dire aussi.
 
-## Bonus, hors barème : tout d'un coup
+## Pour finir — tout d'un coup
 
 La seconde question de la cliente : aurait-elle mieux fait de placer les 8 000 dollars **en une fois**, le 1er janvier 2020 ?
 
@@ -501,12 +487,11 @@ md("""
 
 Et vous savez maintenant ce que vaut un conseil très répandu : il marche, on sait pourquoi, et on sait aussi ce qu'il ne promet pas.
 
-## Avant de rendre
+## Avant de fermer
 
 1. *Exécution → Redémarrer et tout exécuter*.
 2. Toutes les cellules `verifier` affichent `OK`.
-3. Les réponses en texte sont remplies : le diagnostic de la partie 1, l'explication de la 5a, la réponse de la 5b, celle de la partie 6, et le bonus si vous l'avez fait.
-4. Votre nom est en haut du notebook.
+3. Les réponses en texte sont remplies : le diagnostic de la partie 1, l'explication de la 5a, la réponse de la 5b, celle de la partie 6, et la dernière si vous l'avez faite.
 """)
 
 nb = {

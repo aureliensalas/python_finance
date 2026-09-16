@@ -10,9 +10,12 @@ n_code = 0; failures = []; expected_err = []
 for i, c in enumerate(nb["cells"]):
     if c["cell_type"] != "code": continue
     src = "".join(c["source"])
-    if not src.strip():
-        src = sols.get(str(i), "")
-        if not src: print(f"[{i}] cellule vide sans solution"); continue
+    # une solution existe pour cette cellule : elle remplace le contenu, vide ou
+    # simple squelette de commentaires (le corps de boucle de l'assignment 1)
+    if str(i) in sols:
+        src = sols[str(i)]
+    elif not src.strip():
+        print(f"[{i}] cellule vide sans solution"); continue
     src = src.replace("# reponse = ", "reponse = ") if "secours" in src or src.startswith("# reponse") else src
     n_code += 1
     buf = io.StringIO()

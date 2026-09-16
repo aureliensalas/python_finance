@@ -21,20 +21,15 @@ md(f"""
 
 {BADGE}
 
-# Assignment 1 : le simulateur de prêt
+# Le simulateur de prêt
 
-**Travail noté** · lancé en séance, terminé à la maison
+**Travail en autonomie** · bloc 1 · à faire après la séance de Python
 
 > ⚠️ **Avant de taper quoi que ce soit :** *Fichier → Enregistrer une copie dans Drive*. Sinon votre travail sera perdu en fermant l'onglet.
 
-| | |
-|---|---|
-| **Rendu** | ce notebook, toutes les cellules exécutées, [date à fixer] |
-| **Travail** | [seul ou en binôme, à fixer] |
-| **Ressources** | les notebooks des séances 1 et 2, rien d'autre n'est nécessaire |
-| **Barème** | 20 points, détaillé partie par partie |
+Ce notebook n'est pas noté. Il sert à vérifier, seul, que vous savez faire ce que la séance a montré — et à repartir avec quelque chose qui marche vraiment.
 
-Écrivez votre nom ici : **[nom]**
+Tout ce dont vous avez besoin est dans le notebook de cours. Rien d'autre.
 """)
 
 md("""
@@ -61,17 +56,8 @@ Tout ce qui est demandé a été vu en séance 1 ou 2. Quand une partie renvoie 
 ## Comment travailler
 
 - Une idée par cellule. Une cellule qui fait trois choses est difficile à corriger.
-- Après chaque exercice, une cellule `verifier` vous dit si le résultat est bon. Un `A REVOIR` n'enlève pas de points : il vous dit où regarder.
-- Avant de rendre : *Exécution → Redémarrer et tout exécuter*. Tout doit passer sans erreur, de haut en bas.
-
-| Partie | Points |
-|---|---|
-| 1. Les paramètres | 3 |
-| 2. La mensualité | 3 |
-| 3. Le verdict | 3 |
-| 4. Le tableau d'amortissement | 6 |
-| 5. Les résultats | 3 |
-| 6. Les scénarios | 2 |
+- Après chaque exercice, une cellule `verifier` vous dit si le résultat est bon. Un `A REVOIR` n'est pas une faute : il vous dit où regarder.
+- Avant de fermer : *Exécution → Redémarrer et tout exécuter*. Tout doit passer sans erreur, de haut en bas.
 
 Exécutez d'abord la cellule de setup.
 """)
@@ -91,7 +77,7 @@ def verifier(nom, condition, indice=""):
 
 # ---------------------------------------------------------------- Partie 1
 md("""
-## Partie 1 : les paramètres (3 points)
+## Partie 1 : les paramètres
 
 La demande du client arrive d'un formulaire en ligne. Les champs sont remplis par un humain, donc ce sont des **textes**, avec des espaces et des unités.
 """)
@@ -103,7 +89,7 @@ revenu_txt = "3 200 €"
 """)
 
 md("""
-### 1a. Du texte aux nombres (1 point)
+### 1a. Du texte aux nombres
 
 Convertissez ces trois textes en nombres :
 
@@ -134,7 +120,7 @@ verifier("revenu mensuel", revenu_mensuel == 3200.0, "même méthode que pour le
 """)
 
 md("""
-### 1b. Le taux du jour (1 point)
+### 1b. Le taux du jour
 
 Une banque ne fixe pas son taux au hasard. Elle se finance auprès de la **Banque centrale européenne** à un taux appelé **taux directeur**, et elle prête à ses clients un peu plus cher. Le taux directeur est public : la BCE le publie sur un service web.
 
@@ -200,7 +186,7 @@ code("""
 """)
 
 md("""
-### 1c. Le taux du prêt (1 point)
+### 1c. Le taux du prêt
 
 La banque prête plus cher qu'elle n'emprunte : elle ajoute une **marge de 1,2 point** au taux directeur. Si la BCE est à 2,65 %, la banque prête à 3,85 %.
 
@@ -237,7 +223,7 @@ C'est tout ce dont une banque a besoin pour construire une offre. Le reste du tr
 
 # ---------------------------------------------------------------- Partie 2
 md("""
-## Partie 2 : la mensualité (3 points)
+## Partie 2 : la mensualité
 
 Un prêt se rembourse par des versements **égaux** tous les mois. Chaque versement sert à deux choses : payer les **intérêts** sur ce qui reste dû, et rembourser un **morceau du capital**. Au début, ce qui reste dû est élevé, donc les intérêts sont élevés et le morceau de capital est petit. À la fin, c'est l'inverse.
 
@@ -270,11 +256,11 @@ La mensualité est le premier chiffre de l'offre. C'est aussi celui que le clien
 
 # ---------------------------------------------------------------- Partie 3
 md("""
-## Partie 3 : le verdict (3 points)
+## Partie 3 : le verdict
 
 Une banque n'accorde pas un prêt dont la mensualité écraserait le budget du client. Elle calcule le **taux d'effort** : la part du revenu mensuel qui part dans la mensualité.
 
-### 3a. Le taux d'effort et la décision (2 points)
+### 3a. Le taux d'effort et la décision
 
 Calculez `taux_effort`, la mensualité divisée par le revenu mensuel.
 
@@ -301,7 +287,7 @@ verifier("verdict coherent", (taux_effort > 0.35 and verdict == "refus") or (0.3
 """)
 
 md("""
-### 3b. Deux avertissements (1 point)
+### 3b. Deux avertissements
 
 Indépendamment du verdict, la banque signale deux choses, qui peuvent être vraies **toutes les deux** :
 
@@ -323,7 +309,7 @@ Jusqu'ici, tout tient en quelques nombres. La suite construit le détail, mois p
 
 # ---------------------------------------------------------------- Partie 4
 md("""
-## Partie 4 : le tableau d'amortissement (6 points)
+## Partie 4 : le tableau d'amortissement
 
 Le tableau d'amortissement décrit chaque mois du prêt : combien d'intérêts, combien de capital remboursé, combien il reste à rembourser après le versement.
 
@@ -333,7 +319,7 @@ La mécanique d'un mois :
 2. le **capital remboursé** ce mois-ci est ce qui reste de la mensualité une fois les intérêts payés : `mensualite - interets` ;
 3. le **capital restant** diminue d'autant : `capital_restant - rembourse`.
 
-### 4a. Les deux premiers mois, à la main (1 point)
+### 4a. Les deux premiers mois, à la main
 
 Avant d'écrire du code, faites le calcul pour les deux premiers mois et écrivez les résultats dans le tableau ci-dessous, en double-cliquant sur cette cellule. Utilisez une cellule de code comme calculatrice si vous voulez.
 
@@ -346,7 +332,7 @@ Vérifiez que le capital restant après le mois 1 est le capital restant avant l
 """)
 
 md("""
-### 4b. La boucle (4 points)
+### 4b. La boucle
 
 Le calcul du 4a se répète `nb_mois` fois. C'est le travail d'une boucle `for` (séance 2, section 4).
 
@@ -394,7 +380,7 @@ verifier("bilan", abs(mensualite * nb_mois - (capital + sum(interets_liste))) < 
 """)
 
 md("""
-### 4c. Le tableau (1 point)
+### 4c. Le tableau
 
 La cellule suivante assemble vos trois listes en un **tableau à trois colonnes**. Chaque colonne est une de vos listes. C'est un objet pandas, que vous apprendrez à manipuler à la prochaine séance. Exécutez-la.
 """)
@@ -416,9 +402,9 @@ Le tableau d'amortissement est l'offre complète : pour chacun des 240 mois, la 
 
 # ---------------------------------------------------------------- Partie 5
 md("""
-## Partie 5 : les résultats (3 points)
+## Partie 5 : les résultats
 
-### 5a. La courbe du capital restant dû (1 point)
+### 5a. La courbe du capital restant dû
 
 Tracez l'évolution du capital restant dû sur toute la durée du prêt.
 
@@ -428,7 +414,7 @@ Rappel : une liste devient une Series avec `pd.Series(liste)`, et une Series se 
 code("")
 
 md("""
-### 5b. Le coût total du crédit (1 point)
+### 5b. Le coût total du crédit
 
 Le coût du crédit, c'est tout ce que le client paie **en plus** du capital : la somme de tous les intérêts.
 
@@ -448,7 +434,7 @@ verifier("cout du credit", abs(cout_credit - sum(interets_liste)) < 0.01, "sum s
 """)
 
 md("""
-### 5c. Le mois de bascule (1 point)
+### 5c. Le mois de bascule
 
 Au début du prêt, chaque mensualité sert surtout à payer des intérêts. Il arrive un mois où, pour la première fois, la part de capital remboursé dépasse la part d'intérêts. C'est le **mois de bascule**.
 
@@ -477,7 +463,7 @@ Il reste la question ouverte de la partie 3 : le prêt est refusé. Que faudrait
 
 # ---------------------------------------------------------------- Partie 6
 md("""
-## Partie 6 : les scénarios (2 points)
+## Partie 6 : les scénarios
 
 Le client ne peut pas changer son revenu. Il peut changer la **durée**. Une durée plus longue baisse la mensualité, donc le taux d'effort.
 
@@ -514,12 +500,11 @@ md("""
 
 À partir de trois champs de formulaire et d'un taux lu en direct chez la BCE, vous avez produit une offre de prêt complète : la mensualité, la décision, le tableau d'amortissement sur 240 mois, la courbe du capital restant dû, le coût du crédit, le mois de bascule, et la comparaison des durées. Chaque étape a utilisé un outil des séances 1 et 2, et rien d'autre.
 
-## Avant de rendre
+## Avant de fermer
 
 1. *Exécution → Redémarrer et tout exécuter*.
 2. Toutes les cellules `verifier` affichent `OK`.
 3. Les deux réponses en texte sont remplies : l'observation de la partie 4c et la réponse de la partie 6.
-4. Votre nom est en haut du notebook.
 """)
 
 nb = {
