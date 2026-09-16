@@ -5,6 +5,6 @@
  "43": "eth = crypto.query(\"coin == 'ETH'\")\neth_moyenne = eth[\"r\"].mean()\neth_mediane = eth[\"r\"].median()\neth_std = eth[\"r\"].std()\neth_var = eth[\"r\"].quantile(0.05)\nprint(eth_moyenne, eth_mediane, eth_std, eth_var)",
  "65": "crypto[\"hausse\"] = crypto[\"r\"] > 0\npart_hausse = crypto.groupby(\"coin\")[\"hausse\"].mean()\npart_hausse.sort_values()",
  "68": "pire_jour = crypto.groupby(\"coin\")[\"r\"].min()\npire_jour",
- "78": "doge = crypto.query(\"coin == 'DOGE'\")\ndoge[\"r\"].plot(kind=\"hist\", bins=40, title=\"Rendements quotidiens du dogecoin\", xlabel=\"% par jour\", figsize=(8, 4))",
- "85": "vol_2024 = crypto.query(\"annee == 2024\").groupby(\"coin\")[\"r\"].std().sort_values()\nvol_2024"
+ "80": "doge = crypto.query(\"coin == 'DOGE'\")\ndoge[\"r\"].plot(kind=\"hist\", bins=40, title=\"Rendements quotidiens du dogecoin\", xlabel=\"% par jour\", figsize=(8, 4))",
+ "87": "vol_2024 = crypto.query(\"annee == 2024\").groupby(\"coin\")[\"r\"].std().sort_values()\nvol_2024"
 }

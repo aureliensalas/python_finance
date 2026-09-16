@@ -10,7 +10,12 @@ Données : `crypto.csv`, déjà connu. Aucun nouveau fichier.
 
 **Nous codons la présentation, ils codent le contenu.**
 
-Le notebook fournit une fonction `afficher_fiche(...)` qui dessine une **fiche de risque** professionnelle : un bandeau avec le nom de la monnaie et la période, cinq tuiles d'indicateurs, la distribution des rendements avec la VaR et le pire jour marqués dessus, et un classement de volatilité où leur monnaie est mise en évidence.
+Le notebook fournit une fonction `afficher_fiche(...)` qui dessine une **fiche de risque** professionnelle, en quatre étages :
+
+1. un **bandeau** avec le nom de la monnaie et la période couverte ;
+2. le **cours au fil du temps**, en grand — le graphique que tout le monde regarde en premier ;
+3. les **cinq indicateurs**, en tuiles : rendement moyen, rendement médian, volatilité, VaR 95 %, part de jours de hausse ;
+4. en bas, la **distribution des rendements** avec la VaR et le pire jour marqués dessus, et à côté le **classement de volatilité** des sept monnaies, celle de l'étudiant en rouge.
 
 Cette fonction est fournie, jamais à écrire, jamais à modifier. Elle prend **des arguments nommés**, un par indicateur. L'étudiant calcule les indicateurs ; la fiche les affiche.
 
@@ -18,7 +23,7 @@ Cette fonction est fournie, jamais à écrire, jamais à modifier. Elle prend **
 
 C'est le contraire d'un devoir où l'on écrit vingt cellules avant de voir quoi que ce soit. Ici le résultat est visible dès la première minute, incomplet, et chaque calcul le remplit un peu. La motivation est dans la boucle de retour, pas dans la note.
 
-> **Un prototype existe et tourne** sur `crypto.csv`. Il produit exactement la fiche décrite ci-dessus. Il reste à polir (voir section 6).
+> **Le prototype est écrit et tourne** : `prototypes/fiche_risque.py`, avec trois rendus dans le même dossier (`fiche_vide.png`, `fiche_SOL.png`, `fiche_DOGE.png`). C'est lui qui deviendra la cellule fournie du devoir.
 
 ---
 
@@ -38,7 +43,7 @@ La monnaie est **attribuée**, pas choisie : une variable en tête de notebook. 
 
 **Partie 1 — la table et la colonne (3 points).**
 Construire `t`, la table de la monnaie attribuée, avec la colonne de rendement. C'est le geste de la séance 5, `groupby` compris, et le `verifier` vérifie que le maximum n'est pas aberrant — le piège des 933 041 % est rappelé en une ligne.
-Puis premier appel d'`afficher_fiche` : **la fiche vide**. Point d'étape : « voilà ce que vous allez remplir ».
+Puis premier appel d'`afficher_fiche`, avec `nom`, `periode` et `prix` seulement : **le cours s'affiche, tout le reste attend**. Point d'étape : « voilà ce que vous allez remplir ». Le fait que la courbe du cours soit déjà là n'est pas un détail — elle donne une fiche qui a l'air d'exister dès la première minute, et elle rappelle ce que la séance 5 a dit d'elle : elle montre le chemin, pas les secousses.
 
 **Partie 2 — les trois indicateurs de tendance (4 points).**
 `rendement_moyen`, `rendement_median`, et leur interprétation croisée. La consigne demande une phrase : lequel des deux décrit une journée ordinaire, lequel décrit le portefeuille sur la durée, et ce que leur écart raconte sur cette monnaie.
@@ -82,6 +87,7 @@ Signature, à arguments nommés pour que l'appel se lise comme un formulaire :
 afficher_fiche(
     nom=MONNAIE,
     periode=...,              # texte, fourni en partie 1
+    prix=...,                 # la table de la monnaie, pour la courbe du cours
     rendement_moyen=...,      # % par jour
     rendement_median=...,     # % par jour
     volatilite=...,           # écart-type, % par jour
@@ -94,7 +100,7 @@ afficher_fiche(
 )
 ```
 
-**Tout argument omis vaut `None`**, et la tuile correspondante affiche « à compléter » en gris. C'est ce qui permet d'appeler la fonction dès la partie 1.
+**Tout argument omis vaut `None`**, et la partie correspondante affiche « à compléter » en gris — les tuiles comme les deux panneaux du bas, qui prennent alors un cadre discret au lieu d'axes vides. C'est ce qui permet d'appeler la fonction dès la partie 1 sans que la fiche ait l'air cassée.
 
 Elle **annualise toute seule** ce qui doit l'être : le rendement moyen en rendement annuel, la volatilité quotidienne en volatilité annualisée (`× √365`). L'étudiant ne fournit que du quotidien. *(À trancher : voir section 6.)*
 
@@ -130,6 +136,13 @@ Les VaR et médianes de ce tableau restent à revérifier au moment de la constr
 
 **L'attribution de la monnaie.** Tirée du nom, fixée par groupe, ou libre ? Ça change la correction.
 
-**Le polissage du prototype.** Trois défauts visibles sur la figure envoyée : l'étiquette « VaR 95 % » chevauche les barres de l'histogramme, l'espace entre le bandeau et les tuiles est trop grand, et la tuile « médiane » colore en rouge une valeur négative alors que ce n'est pas une alerte mais l'information centrale. À corriger à la construction.
+**La couleur de la tuile « rendement médian ».** Elle passe en rouge quand la valeur est négative — c'est le cas de SOL, DOGE, XRP et ADA. Est-ce une alerte, ou l'information centrale de la fiche ? Je penche pour la garder en rouge : sur une fiche de risque, un rendement médian négatif *est* une alerte, et le contraste avec le rendement moyen vert est exactement ce qu'on veut faire voir. À trancher.
+
+**L'interface avec saisie.** Votre idée d'un champ où l'on tape le code à trois lettres. C'est faisable : `ipywidgets` est préinstallé dans Colab et un `Text` plus un `interact` tiennent en cinq lignes, toutes fournies. Deux réserves, et la première est sérieuse :
+
+- **je ne peux pas le tester d'ici.** Je peux vérifier que le code est valide ; je ne peux pas vérifier qu'il s'affiche dans Colab. Ça se teste en deux minutes dans un vrai notebook, et il faut le faire avant de le mettre dans un devoir noté.
+- une saisie libre accepte les fautes de frappe. Il faut donc un message clair quand le code n'existe pas — « cette monnaie n'est pas dans le fichier ; les sept disponibles sont BTC, ETH, SOL, DOGE, XRP, BNB, ADA » — sinon l'étudiant tombe sur une fiche vide sans comprendre pourquoi.
+
+Ma recommandation : **en bonus, tout à la fin, entièrement fourni, après que la fiche fonctionne avec une simple variable.** Jamais sur le chemin critique de la note. Si le widget ne s'affiche pas chez un étudiant, il a déjà tous ses points.
 
 **Le temps.** Six parties, une quinzaine de cellules à écrire. À vue de nez 1h à 1h15, donc comparable à l'assignment pandas. À confirmer.

@@ -459,6 +459,20 @@ Une règle, et elle tient tout le bloc :
 
 Trois arguments pour habiller, pas plus : `title=`, `xlabel=` ou `ylabel=`, `figsize=`.
 
+### Le graphique que tout le monde regarde
+
+Le cours au fil du temps. C'est le premier graphique qu'on ouvre devant un actif, et bien souvent le seul. Il se trace sur la **table**, pas sur une colonne, parce qu'il lui faut deux colonnes : le temps en abscisse, le prix en ordonnée.
+""")
+
+code("""
+btc.plot(x="date", y="close", title="Cours du bitcoin", ylabel="dollars", figsize=(9, 4))
+""")
+
+md("""
+Il raconte une **trajectoire** : d'où on vient, où on en est. C'est ce qu'on montre en réunion.
+
+Ce qu'il ne dit pas, c'est ce que ça a coûté d'y arriver. Les à-coups, les mois de baisse, les journées à −37 % : tout est écrasé dans la montée. **Un prix montre le chemin ; un rendement montre les secousses.** Le graphique suivant montre les secousses.
+
 ### La forme d'une journée
 
 L'histogramme des rendements du bitcoin. C'est le graphique le plus important du bloc.
@@ -499,13 +513,12 @@ L'arbitrage de la section 3 devient une image : les deux barres montent ensemble
 
 ### Les autres graphiques
 
-Ils existent, on ne les démontre pas aujourd'hui. Une ligne chacun, pour les reconnaître :
+Il en reste trois. Une ligne chacun, pour les reconnaître :
 
 | Je veux... | `kind=` | Sur quoi |
 |---|---|---|
 | comparer des catégories | `"bar"` | un résultat de `groupby` |
 | voir la forme d'une distribution | `"hist"` | une colonne |
-| suivre dans le temps | `"line"` | une table triée par date, avec `x="date", y=` |
 | relier deux colonnes | `"scatter"` | une table, avec `x=` et `y=` |
 
 ### Écrire
@@ -535,6 +548,7 @@ md("""
 | plusieurs mesures par groupe | `df.groupby("coin")["r"].agg(["mean", "std"])` |
 | grouper par une colonne fabriquée | `df["annee"] = df["date"].dt.year`, puis `groupby("annee")` |
 | une part | `(df["r"] > 0).mean()` |
+| une évolution dans le temps | `df.plot(x="date", y="close")` |
 | la forme d'une colonne | `df["r"].plot(kind="hist", bins=40)` |
 | deux mesures côte à côte | `df.groupby(...)["r"].agg([...]).plot(kind="bar")` |
 | habiller | `title=`, `xlabel=` / `ylabel=`, `figsize=` |
