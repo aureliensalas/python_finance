@@ -1,0 +1,30 @@
+# Tout est privé par défaut : seul ce qui est listé ci-dessous part sur GitHub.
+# Corrections, plans, scripts de construction, solutions et prototypes restent en local.
+*
+!*/
+/datacamp_test-main_3/
+!/.gitignore
+!/README.md
+
+# Ressources liées depuis les notebooks
+!ressources/setup_tablette.md
+!ressources/img/logo_macmia.png
+
+# Notebooks étudiants : cours et travaux en autonomie
+!python/cours/*.ipynb
+!python/assignment/*.ipynb
+!pandas_crypto/cours/*.ipynb
+!pandas_crypto/assignment/*.ipynb
+!stats_crypto/cours/*.ipynb
+!stats_crypto/assignment/*.ipynb
+!ml_crypto/cours/*.ipynb
+!ml_crypto/assignment/*.ipynb
+
+# Données chargées par les notebooks
+!pandas_crypto/data/crypto.csv
+!pandas_crypto/data/crypto_sale.csv
+!pandas_crypto/data/crypto_export.csv
+!stats_crypto/data/rendements.csv
+!ml_crypto/data/volatilite.csv
+!ml_crypto/data/minutes_10oct2025.csv
+!ml_crypto/data/credit.csv
