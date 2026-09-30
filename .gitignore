@@ -1,5 +1,5 @@
 # Tout est privé par défaut : seul ce qui est listé ci-dessous part sur GitHub.
-# Corrections, plans, scripts de construction, solutions et prototypes restent en local.
+# Corrections non publiées, plans, scripts de construction, solutions et prototypes restent en local.
 *
 !*/
 /datacamp_test-main_3/
@@ -10,9 +10,10 @@
 !ressources/setup_tablette.md
 !ressources/img/logo_macmia.png
 
-# Notebooks étudiants : cours et travaux en autonomie
+# Notebooks étudiants : cours, travaux en autonomie et corrections publiées
 !python/cours/*.ipynb
 !python/assignment/*.ipynb
+!python/correction/*.ipynb
 !pandas_crypto/cours/*.ipynb
 !pandas_crypto/assignment/*.ipynb
 !stats_crypto/cours/*.ipynb
