@@ -16,6 +16,7 @@
 !python/correction/*.ipynb
 !pandas_crypto/cours/*.ipynb
 !pandas_crypto/assignment/*.ipynb
+!pandas_crypto/correction/*.ipynb
 !stats_crypto/cours/*.ipynb
 !stats_crypto/assignment/*.ipynb
 !ml_crypto/cours/*.ipynb
